@@ -15,6 +15,12 @@
 		C080687A1BE6EA8E001C5B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08068781BE6EA8E001C5B9A /* LaunchScreen.storyboard */; };
 		C08068851BE6EA8E001C5B9A /* UGotMoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068841BE6EA8E001C5B9A /* UGotMoneyTests.swift */; };
 		C08068901BE6EA8E001C5B9A /* UGotMoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080688F1BE6EA8E001C5B9A /* UGotMoneyUITests.swift */; };
+		C080689E1BE6F5D2001C5B9A /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080689D1BE6F5D2001C5B9A /* InputViewController.swift */; };
+		C08068E91BEE8925001C5B9A /* DatePickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */; };
+		C08068EA1BEE8925001C5B9A /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E61BEE8925001C5B9A /* Formatting.swift */; };
+		C08068EB1BEE8925001C5B9A /* LabelAndTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */; };
+		C08068EC1BEE8925001C5B9A /* NamePickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */; };
+		C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068ED1BEEB153001C5B9A /* TextViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		C080688B1BE6EA8E001C5B9A /* UGotMoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UGotMoneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C080688F1BE6EA8E001C5B9A /* UGotMoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UGotMoneyUITests.swift; sourceTree = "<group>"; };
 		C08068911BE6EA8E001C5B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C080689D1BE6F5D2001C5B9A /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewCell.swift; sourceTree = "<group>"; };
+		C08068E61BEE8925001C5B9A /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
+		C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelAndTextFieldCell.swift; sourceTree = "<group>"; };
+		C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePickerViewCell.swift; sourceTree = "<group>"; };
+		C08068ED1BEEB153001C5B9A /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +111,15 @@
 		C080686B1BE6EA8D001C5B9A /* UGotMoney */ = {
 			isa = PBXGroup;
 			children = (
+				C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */,
+				C08068E61BEE8925001C5B9A /* Formatting.swift */,
+				C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */,
+				C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */,
 				C080686C1BE6EA8D001C5B9A /* AppDelegate.swift */,
 				C080686E1BE6EA8D001C5B9A /* ViewController.swift */,
 				C08068701BE6EA8D001C5B9A /* Main.storyboard */,
+				C080689D1BE6F5D2001C5B9A /* InputViewController.swift */,
+				C08068ED1BEEB153001C5B9A /* TextViewCell.swift */,
 				C08068761BE6EA8E001C5B9A /* Assets.xcassets */,
 				C08068781BE6EA8E001C5B9A /* LaunchScreen.storyboard */,
 				C080687B1BE6EA8E001C5B9A /* Info.plist */,
@@ -259,9 +277,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */,
+				C08068EA1BEE8925001C5B9A /* Formatting.swift in Sources */,
+				C08068EB1BEE8925001C5B9A /* LabelAndTextFieldCell.swift in Sources */,
 				C08068751BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld in Sources */,
 				C080686F1BE6EA8D001C5B9A /* ViewController.swift in Sources */,
+				C08068E91BEE8925001C5B9A /* DatePickerViewCell.swift in Sources */,
+				C08068EC1BEE8925001C5B9A /* NamePickerViewCell.swift in Sources */,
 				C080686D1BE6EA8D001C5B9A /* AppDelegate.swift in Sources */,
+				C080689E1BE6F5D2001C5B9A /* InputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
