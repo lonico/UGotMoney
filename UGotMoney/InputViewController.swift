@@ -19,8 +19,10 @@ class InputViewController: UIViewController {
     let cogWheel = NSString(string: "\u{2699}") as String
     
     var clients = ["Charlie Brown", "Lucy Ball", "Lucky Luke", "Antonio Banderas", "Patrick Timsit", "Tom Cruise"]
-    var paymentValues = ["60", "100", "130"]
-    var paymentTypes = ["cash (bills)", "Cash (app)", "Square", "check"]
+    //var paymentValues = ["60", "100", "130"]
+    //var paymentTypes = ["cash (bills)", "Cash (app)", "Square", "check"]
+    var paymentValues: [Float]!
+    var paymentTypes: [String]!
     
     var clientNamePickerView: UIPickerView!
     var paymentValuePickerView: UIPickerView!
@@ -69,28 +71,44 @@ class InputViewController: UIViewController {
         noteTextView = UITextView()
         noteTextView.delegate = self
         noteIsEmpty = true
-    }
+        
+        }
     
     override func viewWillAppear(animated: Bool) {
-        //print(">>> \(__FUNCTION__)")
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        print(">>> \(__FUNCTION__)")
+        
+        paymentValues = PersistentData.getFees()
+        paymentTypes = PersistentData.getPaymentTypes()
+        
+        tableView.setEditing(false, animated: true)
+        addButton.tintColor = UIColor.blueColor()
+        
+        tableView.reloadData()
+        clientNamePickerView.reloadAllComponents()
+        paymentValuePickerView.reloadAllComponents()
+        paymentTypePickerView.reloadAllComponents()
+        
+        let msg = "use the + button, then the i button, to add the"
+        if paymentValues.count == 0 {
+            AlertController.Alert(msg: "\(msg) fee value", title: "no value for fees").dispatchAlert(self)
+        } else if paymentTypes.count == 0 {
+            AlertController.Alert(msg: "\(msg) payment type value", title: "no value for payment types").dispatchAlert(self)
+        }
     }
     
     // MARK: DatePicker actions
     
     @IBAction func dateValueChanged(sender: UIDatePicker) {
+        
         print(">>> dateValueChanged")
         selectedCell.cellTextField.text = Formatting.formattedDate(sender.date)
-        selectedCell.selected = false
-        showSecondRow = false
-        tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
+//        selectedCell.selected = false
+//        showSecondRow = false
+//        tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
     func datePickerEvent(datePicker: UIDatePicker) {
+        
         print("date changed")
     }
     
@@ -99,10 +117,8 @@ class InputViewController: UIViewController {
 
         tableView.setEditing(!tableView.editing, animated: true)
         if tableView.editing {
-            addButton.title = "done"
             addButton.tintColor = UIColor.redColor()
         } else {
-            addButton.title = cogWheel
             addButton.tintColor = UIColor.blueColor()
         }
     }
@@ -205,12 +221,16 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         print(">>> tapped!")
+        let (name, _) = sections[indexPath.section]
+        let vc = storyboard?.instantiateViewControllerWithIdentifier("editAmountsVC") as! EditPickerValuesViewController
+        vc.pickerType = name
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        print("THERE, THERE")
+        print(">>> THERE, THERE")
         if selectedCell != nil && indexPath == secondRowCellIndex && secondRowCellType == "textView" {
-            print("THERE2, THERE2")
+            print(">>> THERE2, THERE2")
             noteTextView.editable = true
             noteTextView.becomeFirstResponder()
         }
@@ -311,7 +331,8 @@ extension InputViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
             return clients[row]
         case paymentValuePickerView:
             //print("titleForRow: paymentValuePickerView - \(row)")
-            return paymentValues[row]
+            let value = NSString(format: "%.2f", paymentValues[row])
+            return String(value)
         case paymentTypePickerView:
             //print("titleForRow: paymentTypePickerView - \(row)")
             return paymentTypes[row]

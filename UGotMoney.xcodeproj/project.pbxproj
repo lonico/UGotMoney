@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C080686D1BE6EA8D001C5B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080686C1BE6EA8D001C5B9A /* AppDelegate.swift */; };
-		C080686F1BE6EA8D001C5B9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080686E1BE6EA8D001C5B9A /* ViewController.swift */; };
 		C08068721BE6EA8D001C5B9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08068701BE6EA8D001C5B9A /* Main.storyboard */; };
 		C08068751BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C08068731BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld */; };
 		C08068771BE6EA8E001C5B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C08068761BE6EA8E001C5B9A /* Assets.xcassets */; };
@@ -21,6 +20,12 @@
 		C08068EB1BEE8925001C5B9A /* LabelAndTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */; };
 		C08068EC1BEE8925001C5B9A /* NamePickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */; };
 		C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068ED1BEEB153001C5B9A /* TextViewCell.swift */; };
+		C0A189E91BF805FD00F48B39 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189E81BF805FD00F48B39 /* Person.swift */; };
+		C0A189EB1BF80BCB00F48B39 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EA1BF80BCB00F48B39 /* Transaction.swift */; };
+		C0A189ED1BF8182C00F48B39 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EC1BF8182C00F48B39 /* PersistentData.swift */; };
+		C0A189EF1BF81D8800F48B39 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EE1BF81D8800F48B39 /* AlertController.swift */; };
+		C0A189F11BF83FCC00F48B39 /* EditPickerValuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */; };
+		C0A189F51BF85D1200F48B39 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +48,6 @@
 /* Begin PBXFileReference section */
 		C08068691BE6EA8D001C5B9A /* UGotMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UGotMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C080686C1BE6EA8D001C5B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C080686E1BE6EA8D001C5B9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C08068711BE6EA8D001C5B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C08068741BE6EA8D001C5B9A /* UGotMoney.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UGotMoney.xcdatamodel; sourceTree = "<group>"; };
 		C08068761BE6EA8E001C5B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +65,12 @@
 		C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelAndTextFieldCell.swift; sourceTree = "<group>"; };
 		C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePickerViewCell.swift; sourceTree = "<group>"; };
 		C08068ED1BEEB153001C5B9A /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		C0A189E81BF805FD00F48B39 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		C0A189EA1BF80BCB00F48B39 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		C0A189EC1BF8182C00F48B39 /* PersistentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
+		C0A189EE1BF81D8800F48B39 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPickerValuesViewController.swift; sourceTree = "<group>"; };
+		C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTextFieldViewController.swift; path = ../InputTextFieldViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,19 +121,24 @@
 		C080686B1BE6EA8D001C5B9A /* UGotMoney */ = {
 			isa = PBXGroup;
 			children = (
+				C080686C1BE6EA8D001C5B9A /* AppDelegate.swift */,
 				C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */,
 				C08068E61BEE8925001C5B9A /* Formatting.swift */,
 				C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */,
 				C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */,
-				C080686C1BE6EA8D001C5B9A /* AppDelegate.swift */,
-				C080686E1BE6EA8D001C5B9A /* ViewController.swift */,
 				C08068701BE6EA8D001C5B9A /* Main.storyboard */,
+				C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */,
 				C080689D1BE6F5D2001C5B9A /* InputViewController.swift */,
+				C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */,
+				C0A189EE1BF81D8800F48B39 /* AlertController.swift */,
 				C08068ED1BEEB153001C5B9A /* TextViewCell.swift */,
 				C08068761BE6EA8E001C5B9A /* Assets.xcassets */,
 				C08068781BE6EA8E001C5B9A /* LaunchScreen.storyboard */,
 				C080687B1BE6EA8E001C5B9A /* Info.plist */,
 				C08068731BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld */,
+				C0A189E81BF805FD00F48B39 /* Person.swift */,
+				C0A189EC1BF8182C00F48B39 /* PersistentData.swift */,
+				C0A189EA1BF80BCB00F48B39 /* Transaction.swift */,
 			);
 			path = UGotMoney;
 			sourceTree = "<group>";
@@ -278,14 +293,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */,
+				C0A189ED1BF8182C00F48B39 /* PersistentData.swift in Sources */,
 				C08068EA1BEE8925001C5B9A /* Formatting.swift in Sources */,
 				C08068EB1BEE8925001C5B9A /* LabelAndTextFieldCell.swift in Sources */,
+				C0A189EF1BF81D8800F48B39 /* AlertController.swift in Sources */,
 				C08068751BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld in Sources */,
-				C080686F1BE6EA8D001C5B9A /* ViewController.swift in Sources */,
+				C0A189EB1BF80BCB00F48B39 /* Transaction.swift in Sources */,
 				C08068E91BEE8925001C5B9A /* DatePickerViewCell.swift in Sources */,
 				C08068EC1BEE8925001C5B9A /* NamePickerViewCell.swift in Sources */,
+				C0A189E91BF805FD00F48B39 /* Person.swift in Sources */,
 				C080686D1BE6EA8D001C5B9A /* AppDelegate.swift in Sources */,
+				C0A189F11BF83FCC00F48B39 /* EditPickerValuesViewController.swift in Sources */,
 				C080689E1BE6F5D2001C5B9A /* InputViewController.swift in Sources */,
+				C0A189F51BF85D1200F48B39 /* InputTextFieldViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +530,7 @@
 				C08068961BE6EA8E001C5B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C08068971BE6EA8E001C5B9A /* Build configuration list for PBXNativeTarget "UGotMoneyTests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +539,7 @@
 				C08068991BE6EA8E001C5B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C080689A1BE6EA8E001C5B9A /* Build configuration list for PBXNativeTarget "UGotMoneyUITests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +548,7 @@
 				C080689C1BE6EA8E001C5B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

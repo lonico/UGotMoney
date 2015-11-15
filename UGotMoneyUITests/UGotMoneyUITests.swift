@@ -31,6 +31,36 @@ class UGotMoneyUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        let tablesQuery = app.tables
+        
+        tablesQuery.cells.containingType(.StaticText, identifier: "Client name").element.tap()
+        tablesQuery.pickerWheels["Antonio Banderas"].adjustToPickerWheelValue("Lucy Ball")  // BUG?  It adjusts to the previous value
+        
+        tablesQuery.cells.containingType(.StaticText, identifier: "Amount Paid").childrenMatchingType(.TextField).element.tap()
+        tablesQuery.pickerWheels["100.00"].adjustToPickerWheelValue("130.00")
+        
+        tablesQuery.cells.containingType(.StaticText, identifier: "Payment type").childrenMatchingType(.TextField).element.tap()
+        tablesQuery.pickerWheels["Square"].adjustToPickerWheelValue("cash (physical)")
+        
+        var textField = tablesQuery.cells.containingType(.StaticText, identifier: "Client name").childrenMatchingType(.TextField).element
+        XCTAssertEqual(textField.value as! String?, "Lucky Luke")
+        
+        textField = tablesQuery.cells.containingType(.StaticText, identifier: "Amount Paid").childrenMatchingType(.TextField).element
+        XCTAssertEqual(textField.value as! String?, "130.00")
+        
+        textField = tablesQuery.cells.containingType(.StaticText, identifier: "Payment type").childrenMatchingType(.TextField).element
+        XCTAssertEqual(textField.value as! String?, "Cash (app)")
+        
+        tablesQuery.cells.containingType(.StaticText, identifier:"Notes").childrenMatchingType(.TextField).element.tap()
+        app.otherElements["The"].tap()
+        app.buttons["Return"].tap()
+        tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(11).childrenMatchingType(.TextView).element.typeText("\n")
+        // Failed to find matching element please file bug (bugreport.apple.com) and provide output from Console.app
+        
     }
+    
+    
     
 }
