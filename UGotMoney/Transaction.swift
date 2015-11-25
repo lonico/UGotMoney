@@ -16,8 +16,26 @@ class Transaction: NSManagedObject {
     @NSManaged var paymentDate: NSDate
     @NSManaged var person: Person
     @NSManaged var amountPaid: Float
-    @NSManaged var paymentMethod: String
+    @NSManaged var paymentType: String
     @NSManaged var notes: String
     @NSManaged var serviceDate: NSDate
+    
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+    
+    init(paymentDate: NSDate, person: Person, amountPaid: Float, paymentType: String, notes: String, serviceDate: NSDate, context: NSManagedObjectContext) {
+        
+        let entity = NSEntityDescription.entityForName("Transaction", inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        
+        self.paymentDate = paymentDate
+        self.person = person
+        self.amountPaid = amountPaid
+        self.paymentType = paymentType
+        self.notes = notes
+        self.serviceDate = serviceDate
+    }
     
 }

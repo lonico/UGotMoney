@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 @objc(Person)
 
@@ -37,7 +38,7 @@ class Person: NSManagedObject {
             self.middleName = middleName!
         }
         if id == nil {
-            self.id = get_next_id()
+            self.id = Person.getNextId()
         } else {
             return nil
         }
@@ -48,31 +49,95 @@ class Person: NSManagedObject {
     }
     
     // return count+1
-    func get_next_id()->Int {
-        let fetchedObjects = fetchedResultsController.fetchedObjects as! [Person]
-        if let max_id = fetchedObjects[0].valueForKey("id") as! Int? {
-            print(">>> \(max_id)")
-            return max_id + 1
-        } else {
+    static func getNextId()->Int {
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Fetch error, \(error.localizedDescription)")
             return 0
         }
+        
+        if let fetchedObjects = fetchedResultsController.fetchedObjects {
+            if fetchedObjects.count > 0 {
+                let max_id = fetchedObjects[0].valueForKey("id") as! Int
+                print(">>> \(max_id)")
+                return max_id + 1
+            }
+        }
+        return 0
     }
     
+    var name: String {
+        
+        return [firstName, lastName].joinWithSeparator(" ")
+    }
+    
+    static func getClientNames() -> [String] {
+        
+        var clientNames: [String] = []
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Fetch error, \(error.localizedDescription)")
+            return clientNames
+        }
+        
+        if let fetchedObjects = fetchedResultsController.fetchedObjects as? [Person] {
+            for person in fetchedObjects {
+                clientNames.append(person.name)
+            }
+        }
+        return clientNames
+    }
+    
+    static func getClientNamesDict() -> [String: Person] {
+        
+        var clientNames: [String: Person] = [:]
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Fetch error, \(error.localizedDescription)")
+            return clientNames
+        }
+        
+        if let fetchedObjects = fetchedResultsController.fetchedObjects as? [Person] {
+            for person in fetchedObjects {
+                clientNames[person.name] = person
+            }
+        }
+        return clientNames
+    }
+    
+    static func getPerson(name: String) -> Person! {
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Fetch error, \(error.localizedDescription)")
+            return nil
+        }
+        
+        if let fetchedObjects = fetchedResultsController.fetchedObjects as? [Person] {
+            for person in fetchedObjects {
+                if name == person.name {
+                    return person
+                }
+            }
+        }
+        return nil
+    }
     
     // MARK: coredata
-    
-    var sharedContext: NSManagedObjectContext {
-        return AppDelegate().managedObjectContext
-    }
-    
-    lazy var fetchedResultsController: NSFetchedResultsController = {
+
+    static var fetchedResultsController: NSFetchedResultsController = {
         
         let request = NSFetchRequest(entityName: "Person")
         
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
         
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate().managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultsController
     }()
-
 }

@@ -26,6 +26,15 @@
 		C0A189EF1BF81D8800F48B39 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EE1BF81D8800F48B39 /* AlertController.swift */; };
 		C0A189F11BF83FCC00F48B39 /* EditPickerValuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */; };
 		C0A189F51BF85D1200F48B39 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */; };
+		C0A189F71BF9333700F48B39 /* AddNewClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */; };
+		C0A189FF1BFED3CB00F48B39 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189FE1BFED3CA00F48B39 /* CoreDataStackManager.swift */; };
+		C0A18A011BFEDC2300F48B39 /* TransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A001BFEDC2300F48B39 /* TransactionTableViewController.swift */; };
+		C0A18A031C010A7C00F48B39 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A021C010A7C00F48B39 /* HttpClient.swift */; };
+		C0A18A051C010B8500F48B39 /* AquaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A041C010B8500F48B39 /* AquaClient.swift */; };
+		C0A18A071C01A1D000F48B39 /* SearchICDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A061C01A1D000F48B39 /* SearchICDViewController.swift */; };
+		C0A18A091C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A081C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift */; };
+		C0A18A0B1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */; };
+		C0A18A0D1C056C5E00F48B39 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +80,15 @@
 		C0A189EE1BF81D8800F48B39 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPickerValuesViewController.swift; sourceTree = "<group>"; };
 		C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTextFieldViewController.swift; path = ../InputTextFieldViewController.swift; sourceTree = "<group>"; };
+		C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewClientViewController.swift; sourceTree = "<group>"; };
+		C0A189FE1BFED3CA00F48B39 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		C0A18A001BFEDC2300F48B39 /* TransactionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewController.swift; sourceTree = "<group>"; };
+		C0A18A021C010A7C00F48B39 /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		C0A18A041C010B8500F48B39 /* AquaClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AquaClient.swift; sourceTree = "<group>"; };
+		C0A18A061C01A1D000F48B39 /* SearchICDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchICDViewController.swift; sourceTree = "<group>"; };
+		C0A18A081C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICD10ResultsTableViewController.swift; sourceTree = "<group>"; };
+		C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICD10DetailsTableViewController.swift; sourceTree = "<group>"; };
+		C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,24 +139,10 @@
 		C080686B1BE6EA8D001C5B9A /* UGotMoney */ = {
 			isa = PBXGroup;
 			children = (
-				C080686C1BE6EA8D001C5B9A /* AppDelegate.swift */,
-				C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */,
-				C08068E61BEE8925001C5B9A /* Formatting.swift */,
-				C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */,
-				C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */,
-				C08068701BE6EA8D001C5B9A /* Main.storyboard */,
-				C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */,
-				C080689D1BE6F5D2001C5B9A /* InputViewController.swift */,
-				C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */,
-				C0A189EE1BF81D8800F48B39 /* AlertController.swift */,
-				C08068ED1BEEB153001C5B9A /* TextViewCell.swift */,
-				C08068761BE6EA8E001C5B9A /* Assets.xcassets */,
-				C08068781BE6EA8E001C5B9A /* LaunchScreen.storyboard */,
 				C080687B1BE6EA8E001C5B9A /* Info.plist */,
-				C08068731BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld */,
-				C0A189E81BF805FD00F48B39 /* Person.swift */,
-				C0A189EC1BF8182C00F48B39 /* PersistentData.swift */,
-				C0A189EA1BF80BCB00F48B39 /* Transaction.swift */,
+				C0A189F81BF9386100F48B39 /* Model */,
+				C0A189FA1BF9388E00F48B39 /* View */,
+				C0A189FB1BF938AC00F48B39 /* Controller */,
 			);
 			path = UGotMoney;
 			sourceTree = "<group>";
@@ -159,6 +163,53 @@
 				C08068911BE6EA8E001C5B9A /* Info.plist */,
 			);
 			path = UGotMoneyUITests;
+			sourceTree = "<group>";
+		};
+		C0A189F81BF9386100F48B39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0A189FE1BFED3CA00F48B39 /* CoreDataStackManager.swift */,
+				C08068731BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld */,
+				C08068E61BEE8925001C5B9A /* Formatting.swift */,
+				C0A189E81BF805FD00F48B39 /* Person.swift */,
+				C0A189EC1BF8182C00F48B39 /* PersistentData.swift */,
+				C0A189EA1BF80BCB00F48B39 /* Transaction.swift */,
+				C0A18A041C010B8500F48B39 /* AquaClient.swift */,
+				C0A18A021C010A7C00F48B39 /* HttpClient.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C0A189FA1BF9388E00F48B39 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C08068761BE6EA8E001C5B9A /* Assets.xcassets */,
+				C08068781BE6EA8E001C5B9A /* LaunchScreen.storyboard */,
+				C08068701BE6EA8D001C5B9A /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C0A189FB1BF938AC00F48B39 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C080686C1BE6EA8D001C5B9A /* AppDelegate.swift */,
+				C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */,
+				C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */,
+				C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */,
+				C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */,
+				C08068ED1BEEB153001C5B9A /* TextViewCell.swift */,
+				C0A189EE1BF81D8800F48B39 /* AlertController.swift */,
+				C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */,
+				C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */,
+				C080689D1BE6F5D2001C5B9A /* InputViewController.swift */,
+				C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */,
+				C0A18A001BFEDC2300F48B39 /* TransactionTableViewController.swift */,
+				C0A18A061C01A1D000F48B39 /* SearchICDViewController.swift */,
+				C0A18A081C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift */,
+				C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,11 +343,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0A18A011BFEDC2300F48B39 /* TransactionTableViewController.swift in Sources */,
 				C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */,
+				C0A18A0D1C056C5E00F48B39 /* ClientTableViewController.swift in Sources */,
+				C0A189F71BF9333700F48B39 /* AddNewClientViewController.swift in Sources */,
+				C0A18A091C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift in Sources */,
 				C0A189ED1BF8182C00F48B39 /* PersistentData.swift in Sources */,
+				C0A18A031C010A7C00F48B39 /* HttpClient.swift in Sources */,
+				C0A189FF1BFED3CB00F48B39 /* CoreDataStackManager.swift in Sources */,
 				C08068EA1BEE8925001C5B9A /* Formatting.swift in Sources */,
 				C08068EB1BEE8925001C5B9A /* LabelAndTextFieldCell.swift in Sources */,
 				C0A189EF1BF81D8800F48B39 /* AlertController.swift in Sources */,
+				C0A18A051C010B8500F48B39 /* AquaClient.swift in Sources */,
 				C08068751BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld in Sources */,
 				C0A189EB1BF80BCB00F48B39 /* Transaction.swift in Sources */,
 				C08068E91BEE8925001C5B9A /* DatePickerViewCell.swift in Sources */,
@@ -304,7 +362,9 @@
 				C0A189E91BF805FD00F48B39 /* Person.swift in Sources */,
 				C080686D1BE6EA8D001C5B9A /* AppDelegate.swift in Sources */,
 				C0A189F11BF83FCC00F48B39 /* EditPickerValuesViewController.swift in Sources */,
+				C0A18A071C01A1D000F48B39 /* SearchICDViewController.swift in Sources */,
 				C080689E1BE6F5D2001C5B9A /* InputViewController.swift in Sources */,
+				C0A18A0B1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift in Sources */,
 				C0A189F51BF85D1200F48B39 /* InputTextFieldViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

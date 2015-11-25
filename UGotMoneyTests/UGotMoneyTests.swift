@@ -48,4 +48,14 @@ class UGotMoneyTests: XCTestCase {
         }
     }
     
+    func testFloatoString() {
+        let str = Formatting.formattedCurrency(12.34)
+        XCTAssertEqual(str, "$12.34")
+    }
+    
+    func testStringToFloat() {
+        let fvalue = Formatting.floatFromCurrency("$1456.45")
+        XCTAssertEqual(fvalue, 1456.45)
+    }
+    
 }

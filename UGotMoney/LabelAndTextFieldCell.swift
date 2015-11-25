@@ -22,7 +22,8 @@ class LabelAndTextFieldCell: UITableViewCell {
         case "datePicker":
             cell.cellTextField.text = Formatting.formattedDate(NSDate())
             //print(">>>>", Formatting.formattedDate(NSDate()))
-        default: break
+        default:
+            cell.cellTextField.text = ""
         }
         //print(">>> Identifier \(identifier)")
         return cell

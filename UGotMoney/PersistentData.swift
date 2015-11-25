@@ -13,6 +13,7 @@ struct PersistentData {
     struct Keys {
         static let paymentTypes = "paymentTypes"
         static let fees = "fees"
+        static let ICDs = "ICDs"
     }
     
     static func getPaymentTypes() -> [String] {
@@ -44,4 +45,21 @@ struct PersistentData {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(fees, forKey: Keys.fees)
     }
+    
+    static func getICDs() -> [String] {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let ICDs = defaults.arrayForKey(Keys.ICDs) as! [String]? {
+            return ICDs
+        }
+        return []
+    }
+    
+    static func storeICDs(ICDs: [String]) {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(ICDs, forKey: Keys.ICDs)
+    }
+    
+
 }

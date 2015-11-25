@@ -58,6 +58,9 @@ struct AlertController {
         static let Generic = "Alert"
         static let InternalError = "Internal error"
         
+        static let AuthenticationError = "Failed to connect or authenticate with server"
+        static let QueryError = "Failed to query data from server"
+        static let EmptyName = "Empty name"
         static let RefreshError = "Refresh error"
         static let OpenURLError = "Failed to open URL"
         static let MissingURLError = "Empty URL string"
