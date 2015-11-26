@@ -19,6 +19,7 @@ class Person: NSManagedObject {
     @NSManaged var middleName: String
     @NSManaged var id: Int              // unique id for privacy
     @NSManaged var transactions: [Transaction]
+    @NSManaged var active: Bool
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         
@@ -42,6 +43,15 @@ class Person: NSManagedObject {
         } else {
             return nil
         }
+        active = true
+    }
+    
+    func deactivate() {
+        active = false
+    }
+
+    func activate() {
+        active = true
     }
     
     var checksum: Int {
@@ -70,7 +80,12 @@ class Person: NSManagedObject {
     
     var name: String {
         
-        return [firstName, lastName].joinWithSeparator(" ")
+        return [firstName, middleName, lastName].joinWithSeparator(" ")
+    }
+    
+    static func name(firstName: String, middleName: String, lastName: String) -> String {
+        
+        return [firstName, middleName, lastName].joinWithSeparator(" ")
     }
     
     static func getClientNames() -> [String] {
@@ -89,6 +104,12 @@ class Person: NSManagedObject {
             }
         }
         return clientNames
+    }
+    
+    static func getClientNamesLowerCase() -> [String] {
+        
+        let clientNames = getClientNames()
+        return clientNames.map({$0.lowercaseString})
     }
     
     static func getClientNamesDict() -> [String: Person] {
@@ -135,6 +156,7 @@ class Person: NSManagedObject {
         let request = NSFetchRequest(entityName: "Person")
         
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        request.predicate = NSPredicate(format: "active == true")
         
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)

@@ -49,10 +49,13 @@ struct PersistentData {
     static func getICDs() -> [String] {
         
         let defaults = NSUserDefaults.standardUserDefaults()
-        if let ICDs = defaults.arrayForKey(Keys.ICDs) as! [String]? {
+        if var ICDs = defaults.arrayForKey(Keys.ICDs) as! [String]? {
+            if !ICDs.contains("") {
+                ICDs.append("")
+            }
             return ICDs
         }
-        return []
+        return [""]
     }
     
     static func storeICDs(ICDs: [String]) {
@@ -60,6 +63,4 @@ struct PersistentData {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(ICDs, forKey: Keys.ICDs)
     }
-    
-
 }

@@ -17,25 +17,42 @@ class Transaction: NSManagedObject {
     @NSManaged var person: Person
     @NSManaged var amountPaid: Float
     @NSManaged var paymentType: String
+    @NSManaged var icd10: String
     @NSManaged var notes: String
     @NSManaged var serviceDate: NSDate
+    
+    enum FieldName {
+        case paymentDate
+        case clientName
+        case paymentValue
+        case paymentType
+        case icd10
+        case serviceDate
+        case notes
+    }
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
-    init(paymentDate: NSDate, person: Person, amountPaid: Float, paymentType: String, notes: String, serviceDate: NSDate, context: NSManagedObjectContext) {
+    init(transactionDict: [FieldName: AnyObject!], context: NSManagedObjectContext) {
         
         let entity = NSEntityDescription.entityForName("Transaction", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         
-        self.paymentDate = paymentDate
+        let person = Person.getPerson(transactionDict[.clientName] as! String)
+        print(">>>person: \(person)")
+        
         self.person = person
-        self.amountPaid = amountPaid
-        self.paymentType = paymentType
-        self.notes = notes
-        self.serviceDate = serviceDate
+        self.amountPaid = transactionDict[.paymentValue] as! Float
+        self.paymentType = transactionDict[.paymentType] as! String
+        self.icd10 = transactionDict[.icd10] as! String
+        self.notes = transactionDict[.notes] as! String
+        self.paymentDate = transactionDict[.paymentDate] as? NSDate ?? NSDate()
+        self.serviceDate = transactionDict[.serviceDate] as? NSDate ?? self.paymentDate
     }
+    
+    
     
 }

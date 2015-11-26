@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddNewClientViewControllerDelegate {
-    func didFinishAddingClient(controller: AddNewClientViewController, value: Person!)
+    func didFinishAddingClient(value: Person!)
 }
 
 class AddNewClientViewController: UIViewController {
@@ -21,7 +21,7 @@ class AddNewClientViewController: UIViewController {
     @IBOutlet var middleNameTF: UITextField!
     @IBOutlet var lastNameTF: UITextField!
     
-    @IBOutlet var addButton: UIButton!
+    @IBOutlet var addButton: UIBarButtonItem!
     
     var delegate: AddNewClientViewControllerDelegate! = nil
     
@@ -46,23 +46,27 @@ class AddNewClientViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @IBAction func addButtonTouchUp(sender: UIButton) {
+    @IBAction func addButtonTouchUp(sender: UIBarButtonItem) {
         
+        let firstName = firstNameTF.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let middleName = middleNameTF.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let lastName = lastNameTF.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let name = Person.name(firstName, middleName: middleName, lastName: lastName)
+        if Person.getClientNamesLowerCase().contains(name.lowercaseString) {
+            AlertController.Alert(msg: "A person with the same name already exists", title: AlertController.AlertTitle.DuplicateEntry).showAlert(self)
+            return
+        }
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
-        let person = Person(firstName: firstNameTF.text!, middleName: middleNameTF.text, lastName: lastNameTF.text!, id: nil, context: context)
+        let person = Person(firstName: firstName, middleName: middleName, lastName: lastName, id: nil, context: context)
         print(person)
         let nserror = CoreDataStackManager.sharedInstance().saveContext()
         if nserror != nil {
             AlertController.Alert(msg: nserror.localizedDescription, title: "Error!").showAlert(self)
             return
         }
-        delegate.didFinishAddingClient(self, value: person)
-    }
-    
-    @IBAction func cancelButtonTouchUp(sender: UIButton) {
-        view.endEditing(true)
-        delegate.didFinishAddingClient(self, value: nil)
-    }
+        CoreDataStackManager.sharedInstance().saveContext()
+        delegate.didFinishAddingClient(person)
+    }    
 }
 
 extension AddNewClientViewController: UITextFieldDelegate {

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ICD10DetailsTableViewControllerDelegate {
-    func didSelectICD(controller: ICD10DetailsTableViewController, value: String!)
+    func didSelectICD(value: String!)
 }
 
 class ICD10DetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -97,7 +97,7 @@ class ICD10DetailsTableViewController: UIViewController, UITableViewDataSource, 
         print("ADD ACTION TBD")
         for vc in (navigationController?.viewControllers)! {
             if vc.isKindOfClass(EditPickerValuesViewController) {
-                 (vc as! EditPickerValuesViewController).didSelectICD(self, value: mainTitle)
+                 (vc as! EditPickerValuesViewController).didSelectICD(mainTitle)
             }
         }
     }

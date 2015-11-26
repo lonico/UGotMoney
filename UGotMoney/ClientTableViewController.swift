@@ -11,6 +11,7 @@ import CoreData
 
 class ClientTableViewController: UIViewController {
 
+    @IBOutlet var tableView: UITableView!
     var clients: [Person]!
     
     override func viewWillAppear(animated: Bool) {
@@ -33,6 +34,13 @@ class ClientTableViewController: UIViewController {
             return fetchedObjects
         }
         return nil
+    }
+    
+    @IBAction func addButtonTouchUp(sender: UIBarButtonItem) {
+        
+        let vc = storyboard?.instantiateViewControllerWithIdentifier("addNewClientVC") as! AddNewClientViewController
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     // MARK: coredata
@@ -61,12 +69,26 @@ extension ClientTableViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("clientCell")!
         let person = clients[indexPath.row]
         cell.textLabel?.text = person.name
-        cell.accessoryType = .DetailButton  // TODO: only 1 there is at least one transaction
+        if person.transactions.count > 0 {
+            cell.accessoryType = .DetailButton
+        }
+        if !person.active {
+            cell.textLabel?.textColor = UIColor.lightGrayColor()
+        }
         return cell
     }
 }
 
 extension ClientTableViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        
+        let person = clients[indexPath.row]
+        if person.transactions.count > 0 {
+            return indexPath
+        }
+        return nil
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -74,5 +96,17 @@ extension ClientTableViewController: UITableViewDelegate {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("transactionTable") as! TransactionTableViewController
         vc.person = person
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension ClientTableViewController: AddNewClientViewControllerDelegate {
+    
+    func didFinishAddingClient(value: Person!) {
+        
+        navigationController?.popViewControllerAnimated(true)
+        if value != nil {
+            clients = getPersons()
+            tableView.reloadData()
+        }
     }
 }

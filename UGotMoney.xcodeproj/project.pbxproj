@@ -194,13 +194,13 @@
 			isa = PBXGroup;
 			children = (
 				C080686C1BE6EA8D001C5B9A /* AppDelegate.swift */,
-				C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */,
 				C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */,
 				C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */,
 				C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */,
 				C08068ED1BEEB153001C5B9A /* TextViewCell.swift */,
 				C0A189EE1BF81D8800F48B39 /* AlertController.swift */,
 				C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */,
+				C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */,
 				C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */,
 				C080689D1BE6F5D2001C5B9A /* InputViewController.swift */,
 				C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */,

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InputTextFieldViewControllerDelegate {
-    func didFinishEditingInputTextField(controller: InputTextFieldViewController, value: String!)
+    func didFinishEditingInputTextField(value: String!)
 }
 
 class InputTextFieldViewController: UIViewController, UITextFieldDelegate {
@@ -31,16 +31,12 @@ class InputTextFieldViewController: UIViewController, UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
     
-    @IBAction func doneButtonTouchUp(sender: UIButton) {
+    
+    @IBAction func addButtonTouchUp(sender: UIBarButtonItem) {
         
         value = textField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         print(">>> value: \(value)")
-        delegate.didFinishEditingInputTextField(self, value: value)
-    }
-    
-    @IBAction func cancelButtonTouchUp(sender: UIButton) {
-        
-        delegate.didFinishEditingInputTextField(self, value: nil)
+        delegate.didFinishEditingInputTextField(value)
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {

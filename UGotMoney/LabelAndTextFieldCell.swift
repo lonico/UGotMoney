@@ -13,13 +13,13 @@ class LabelAndTextFieldCell: UITableViewCell {
     @IBOutlet var cellLabel: UILabel!
     @IBOutlet var cellTextField: UITextField!
 
-    static func getCellForLabelAndText(tableView: UITableView, name: String, type: String) -> UITableViewCell {
+    static func getCellForLabelAndText(tableView: UITableView, name: String, type: InputViewController.FieldType) -> UITableViewCell {
         let identifier = "LabelAndTextFieldCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LabelAndTextFieldCell
         cell.cellLabel.text = name
         cell.editingAccessoryType = .DetailDisclosureButton
         switch type {
-        case "datePicker":
+        case .datePicker:
             cell.cellTextField.text = Formatting.formattedDate(NSDate())
             //print(">>>>", Formatting.formattedDate(NSDate()))
         default:

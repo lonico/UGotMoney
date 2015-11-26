@@ -16,14 +16,24 @@ class InputViewController: UIViewController {
     @IBOutlet var toolBar: UIToolbar!
     @IBOutlet var saveButton: UIBarButtonItem!
     
-    let cogWheel = NSString(string: "\u{2699}") as String
     
-    var clients: [String]!
-    //var paymentValues = ["60", "100", "130"]
-    //var paymentTypes = ["cash (bills)", "Cash (app)", "Square", "check"]
-    var paymentValues: [Float]!
-    var paymentTypes: [String]!
-    var ICDs: [String]!
+    enum FieldType {
+        case datePicker
+        case namePicker
+        case textField
+        case textLabel
+    }
+    
+    struct Choices {
+        var clients: [String]
+        var paymentValues: [Float]
+        var paymentTypes: [String]
+        var ICDs: [String]
+    }
+    
+    var transactionDict: [Transaction.FieldName: AnyObject!] = [:]
+    
+    var choices: Choices!
     
     var clientNamePickerView: UIPickerView!
     var paymentValuePickerView: UIPickerView!
@@ -37,25 +47,20 @@ class InputViewController: UIViewController {
     var expandedIndexPath: NSIndexPath! = nil
     var showSecondRow = false
     var secondRowCellIndex: NSIndexPath!
-    var secondRowCellType = ""
-    
-    var clientName = ""
-    var paymentAmount: Float!
-    var paymentType = ""
-    var paymentDate: NSDate!
-    var ICD = ""
-    var serviceDate: NSDate!
-    var notes = ""
+    var secondRowCellFieldName: Transaction.FieldName!
+    var secondRowCellFieldType: FieldType!
     
     var origin_y: CGFloat!
     
-    let sections = [("Payment date", "datePicker"),
-        ("Client name", "namePicker"),
-        ("Amount paid", "namePicker"),
-        ("Payment type", "namePicker"),
-        ("ICD", "namePicker"),
-        ("Service date", "datePicker"),
-        ("Notes", "textView")]
+    let sections: [(Transaction.FieldName, FieldType)] = [
+        (.paymentDate, .datePicker),
+        (.clientName, .namePicker),
+        (.paymentValue, .namePicker),
+        (.paymentType, .namePicker),
+        (.icd10, .namePicker),
+        (.serviceDate, .datePicker),
+        (.notes, .textField)
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,17 +84,16 @@ class InputViewController: UIViewController {
         noteTextView = UITextView()
         noteTextView.delegate = self
         resetValues()
-        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         print(">>> \(__FUNCTION__)")
         
         super.viewWillAppear(animated)
-        clients = Person.getClientNames()
-        paymentValues = PersistentData.getFees()
-        paymentTypes = PersistentData.getPaymentTypes()
-        ICDs = PersistentData.getICDs()
-        
+        choices = Choices(clients: Person.getClientNames(),
+                          paymentValues: PersistentData.getFees(),
+                          paymentTypes: PersistentData.getPaymentTypes(),
+                          ICDs: PersistentData.getICDs())
         tableView.setEditing(false, animated: true)
         editButton.tintColor = UIColor.blueColor()
         saveButton.enabled = false
@@ -99,15 +103,6 @@ class InputViewController: UIViewController {
         paymentValuePickerView.reloadAllComponents()
         paymentTypePickerView.reloadAllComponents()
         ICDPickerView.reloadAllComponents()
-        
-        let msg = "use the edit button, then the i button, to add "
-        if clients.count == 0 {
-            AlertController.Alert(msg: "\(msg) client names", title: "no client").dispatchAlert(self)
-        } else if paymentValues.count == 0 {
-            AlertController.Alert(msg: "\(msg) fees", title: "no value for fees").dispatchAlert(self)
-        } else if paymentTypes.count == 0 {
-            AlertController.Alert(msg: "\(msg) payment types", title: "no value for payment type").dispatchAlert(self)
-        }
     }
     
     // MARK: DatePicker actions
@@ -119,23 +114,27 @@ class InputViewController: UIViewController {
             print("Unexpected UIDatePicker dateValueChanged (nil) for \(selectedCell)")
             return
         }
+        if secondRowCellFieldName == nil {
+            print("Unexpected secondRowCellType (nil) for \(selectedCell)")
+            return
+        }
         selectedCell.cellTextField.text = Formatting.formattedDate(sender.date)
-        switch selectedCell.cellLabel.text! {
-        case "Payment date":
-            paymentDate = sender.date
-            if serviceDate == nil {
-                serviceDate = sender.date
+        switch secondRowCellFieldName! {
+        case .paymentDate:
+            transactionDict[.paymentDate] = sender.date
+            if transactionDict[.serviceDate] == nil {
+                transactionDict[.serviceDate] = sender.date
             }
-        case "Service date":
-            serviceDate = sender.date
-            if paymentDate == nil {
-                paymentDate = sender.date
+        case .serviceDate:
+            transactionDict[.serviceDate] = sender.date
+            if transactionDict[.paymentDate] == nil {
+                transactionDict[.paymentDate] = sender.date
             }
         default:
             print("Unexpected UIDatePicker dateValueChanged for \(selectedCell)")
         }
     }
-    
+
     // MARK: action buttons
     
     @IBAction func EditButtonAction(sender: UIBarButtonItem) {
@@ -147,34 +146,25 @@ class InputViewController: UIViewController {
             editButton.tintColor = UIColor.blueColor()
         }
     }
-    
+
     @IBAction func organizeButtonTouchUp(sender: UIBarButtonItem) {
         // present transaction table VC
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("transactionTable")
         navigationController?.pushViewController(vc!, animated: true)
     }
-    
+
     @IBAction func showClientsTouchUp(sender: UIBarButtonItem) {
         // present client table VC
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("clientTableViewController")
         navigationController?.pushViewController(vc!, animated: true)
     }
-    
-    
+
     @IBAction func saveButtonTouchUp(sender: UIBarButtonItem) {
         
         print(">>> Saving transaction")
         view.endEditing(true)
-        if paymentDate == nil {
-            paymentDate = NSDate()
-        }
-        if serviceDate == nil {
-            serviceDate = paymentDate
-        }
-        let person = Person.getPerson(clientName)
-        print(">>>person: \(person)")
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
-        let transaction = Transaction(paymentDate: paymentDate, person: person, amountPaid: paymentAmount, paymentType: paymentType, notes: notes, serviceDate: serviceDate, context: context)
+        let transaction = Transaction(transactionDict: transactionDict, context: context)
         print("transaction: \(transaction)")
         let nserror = CoreDataStackManager.sharedInstance().saveContext()
         var alert: AlertController.Alert
@@ -191,7 +181,9 @@ class InputViewController: UIViewController {
     
     func enableSaveButton() {
         
-        saveButton.enabled = clientName != "" && paymentAmount != nil && paymentType != ""
+        saveButton.enabled = transactionDict[.clientName] as! String != "" &&
+                             transactionDict[.paymentValue] != nil &&
+                             transactionDict[.paymentType] as! String != ""
     }
     
     func print_internal_error() {
@@ -212,7 +204,7 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let (_, type) = sections[section]
-        if type == "datePicker" || type == "namePicker" || type == "textView" {
+        if type == .datePicker || type == .namePicker || type == .textField {
             return 2
         }
         return 1
@@ -226,13 +218,13 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
         
         var cell = UITableViewCell()
         if row == 0 {
-            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: name, type: type)
+            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: InputViewController.getFieldLabel(name), type: type)
             let acell = cell as! LabelAndTextFieldCell
             acell.cellTextField.text = getValue(name)
         } else if row == 1 {
             cell = getCellForSecondRow(tableView, name: name, type: type)
         } else {
-            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: "ERROR: unexpected row: \(row)", type: "text")
+            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: "ERROR: unexpected row: \(row)", type: .textLabel)
             print("ERROR: unexpected row: \(row)")
         }
         return cell
@@ -267,14 +259,19 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
             //let acell = tableView.cellForRowAtIndexPath(indexPath) as! LabelAndTextFieldCell
+            let (name, type) = sections[indexPath.section]
+            if getCount(name) == 0 {
+                AlertController.Alert(msg: "please add value for \(InputViewController.getFieldLabel(name)) using the edit button (bottom left)", title: AlertController.AlertTitle.EmptyList).showAlert(self)
+                return
+            }
             selectedCell = acell
-            let (_, type) = sections[indexPath.section]
             switch type {
-            case "datePicker", "namePicker", "textView":
+            case .datePicker, .namePicker, .textField:
                 showSecondRow = true
                 secondRowCellIndex = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
                 tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
-                secondRowCellType = type
+                secondRowCellFieldName = name
+                secondRowCellFieldType = type
             default:
                 break
             }
@@ -288,7 +285,7 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         let (_, type) = sections[indexPath.section]
         switch type {
-        case "namePicker":
+        case .namePicker:
             return true
         default:
             return false
@@ -303,12 +300,12 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
         print(">>> tapped!")
         let (name, _) = sections[indexPath.section]
         let vc = storyboard?.instantiateViewControllerWithIdentifier("editAmountsVC") as! EditPickerValuesViewController
-        vc.pickerType = name
+        vc.pickerLabel = name
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if selectedCell != nil && indexPath == secondRowCellIndex && secondRowCellType == "textView" {
+        if selectedCell != nil && indexPath == secondRowCellIndex && secondRowCellFieldName == Transaction.FieldName.notes {
             noteTextView.editable = true
             noteTextView.becomeFirstResponder()
         }
@@ -317,30 +314,30 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
 
     // MARK: utilify functions
     
-    func getCellForSecondRow(tableView: UITableView, name: String, type: String) -> UITableViewCell {
+    func getCellForSecondRow(tableView: UITableView, name: Transaction.FieldName, type: FieldType) -> UITableViewCell {
         var cell: UITableViewCell
         var error: String! = nil
-        if type == "textView" {
+        switch(type) {
+        case.textField:
             cell = TextViewCell.getCellForTextView(tableView, textView: noteTextView)
-        }
-        else if type == "datePicker" {
+        case .datePicker:
             cell = DatePickerViewCell.getCellForDatePickerView(tableView)
-        } else if type == "namePicker" {
+        case .namePicker:
             var selection: Int
             var pickerView: UIPickerView!
             switch name {
-            case "Client name":
+            case .clientName:
                 pickerView = clientNamePickerView
-                selection = clients.count / 2
-            case "Amount paid":
+                selection = choices.clients.count / 2
+            case .paymentValue:
                 pickerView = paymentValuePickerView
-                selection = paymentValues.count / 2
-            case "Payment type":
+                selection = choices.paymentValues.count / 2
+            case .paymentType:
                 pickerView = paymentTypePickerView
-                selection = paymentTypes.count / 2
-            case "ICD":
+                selection = choices.paymentTypes.count / 2
+            case .icd10:
                 pickerView = ICDPickerView
-                selection = ICDs.count / 2
+                selection = choices.ICDs.count / 2
             default:
                 error = "ERROR: unexpected name: \(name)"
                 pickerView = nil
@@ -349,11 +346,11 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
             if error == nil {
                 cell = NamePickerViewCell.getCellForNamePickerView(tableView, pickerView: pickerView!, selected: selection)
             } else {
-                cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: "text")
+                cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: .textLabel)
             }
-        } else {
+        default:
             error = "ERROR: unexpected type: \(type)"
-            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: "text")
+            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: .textLabel)
         }
         return cell
     }
@@ -370,47 +367,86 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func resetValues() {
-        clientName = ""
-        paymentAmount = nil
-        paymentType = ""
-        ICD = ""
-        serviceDate = nil
+        
+        transactionDict[.clientName] = ""
+        transactionDict[.paymentValue] = nil
+        transactionDict[.paymentType] = ""
+        transactionDict[.icd10] = ""
+        transactionDict[.serviceDate] = nil
         //paymentDate = nil
-        notes = ""
+        transactionDict[.notes] = ""
         noteIsEmpty = true
         noteTextView.text = ""
     }
     
-    func getValue(name: String) -> String {
+    func getValue(name: Transaction.FieldName) -> String {
         
         var value: String!
         switch name {
-        case "Client name":
-            value = clientName
-        case "Amount paid":
-            value = Formatting.formattedCurrency(paymentAmount)
-        case "Payment type":
-            value = paymentType
-        case "Service date":
-            value = Formatting.formattedDate(serviceDate)
-        case "Payment date":
-            var pd = paymentDate
+        case .clientName, .paymentType, .icd10, .notes:
+            value = transactionDict[name] as? String
+        case .paymentValue:
+            value = Formatting.formattedCurrency(transactionDict[name] as? Float)
+        case .serviceDate:
+            value = Formatting.formattedDate(transactionDict[name] as? NSDate)
+        case .paymentDate:
+            var pd = transactionDict[name] as? NSDate
             if pd == nil {
                 pd = NSDate()
             }
             value = Formatting.formattedDate(pd)
-        case "ICD":
-            value = ICD
-        case "Notes":
-            value = notes
-        default:
-            print_internal_error()
         }
-        if value == nil {
-            return ""
+        return value ?? ""
+    }
+
+    // return number of elements for pickerChoices
+    // DatePickers arbitrirarly set to 1
+    func getCount(name: Transaction.FieldName) -> Int {
+        
+        var value: Int
+        switch name {
+        case .clientName:
+            value = choices.clients.count
+        case .paymentValue:
+            value = choices.paymentValues.count
+        case .paymentType:
+            value = choices.paymentTypes.count
+        case .paymentDate:
+            value = 1
+        case .serviceDate:
+            value = 1
+        case .icd10:
+            value = choices.ICDs.count
+        case .notes:
+            value = 1
         }
         return value
     }
+    
+    // return number of elements for pickerChoices
+    // DatePickers arbitrirarly set to 1
+    static func getFieldLabel(name: Transaction.FieldName) -> String {
+        
+        var value: String
+        switch name {
+        case .clientName:
+            value = "Client name"
+        case .paymentValue:
+            value = "Amount paid"
+        case .paymentType:
+            value = "Payment type"
+        case .paymentDate:
+            value = "Payment date"
+        case .serviceDate:
+            value = "Service date"
+        case .icd10:
+            value = "ICD-10"
+        case .notes:
+            value = "Notes"
+        }
+        return value
+    }
+    
 
 }
 
@@ -428,13 +464,13 @@ extension InputViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
         }
         switch pickerView {
         case clientNamePickerView:
-            return clients.count
+            return choices.clients.count
         case paymentValuePickerView:
-            return paymentValues.count
+            return choices.paymentValues.count
         case paymentTypePickerView:
-            return paymentTypes.count
+            return choices.paymentTypes.count
         case ICDPickerView:
-            return ICDs.count
+            return choices.ICDs.count
         default:
             return 0
         }
@@ -444,45 +480,57 @@ extension InputViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(">>> Selected: \(component) - \(row)")
-        let text = self.pickerView(pickerView, titleForRow: row, forComponent: component)!
-        selectedCell.cellTextField.text = text
-        selectedCell.selected = false
-        showSecondRow = false
-        switch pickerView {
-        case clientNamePickerView:
-            clientName = text
-        case paymentValuePickerView:
-            paymentAmount = (text as NSString).floatValue
-        case paymentTypePickerView:
-            paymentType = text
-        case ICDPickerView:
-            ICD = text
-        default:
-            print_internal_error()
+        if let text = self.pickerView(pickerView, titleForRow: row, forComponent: component) {
+            selectedCell.cellTextField.text = text
+            selectedCell.selected = false
+            showSecondRow = false
+            switch pickerView {
+            case clientNamePickerView:
+                transactionDict[.clientName] = text
+            case paymentValuePickerView:
+                transactionDict[.paymentValue] = Formatting.floatFromCurrency(text)
+            case paymentTypePickerView:
+                transactionDict[.paymentType] = text
+            case ICDPickerView:
+                transactionDict[.icd10] = text
+            default:
+                print_internal_error()
+            }
+            enableSaveButton()
         }
-        enableSaveButton()
         tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        var value: String! = nil
         if component != 0 {
-            return nil
+            return value
         }
         switch pickerView {
         case clientNamePickerView:
             //print("titleForRow: clientNamePickerView - \(row)")
-            return clients[row]
+            if choices.clients.count > 0 {
+                value = choices.clients[row]
+            }
         case paymentValuePickerView:
             //print("titleForRow: paymentValuePickerView - \(row)")
-            return Formatting.formattedCurrency(paymentValues[row])
+            if choices.paymentValues.count > 0 {
+                value = Formatting.formattedCurrency(choices.paymentValues[row])
+            }
         case paymentTypePickerView:
             //print("titleForRow: paymentTypePickerView - \(row)")
-            return paymentTypes[row]
+            if choices.paymentTypes.count > 0 {
+                value = choices.paymentTypes[row]
+            }
         case ICDPickerView:
-            return ICDs[row]
+            if choices.ICDs.count > 0 {
+                value = choices.ICDs[row]
+            }
         default:
-            return nil
+            break
         }
+        return value
     }
 }
 
@@ -495,13 +543,12 @@ extension InputViewController: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(textView: UITextView) {
-        print("HERE")
         let text = textView.text
         noteIsEmpty = text == ""
         selectedCell.cellTextField.text = text
         if noteIsEmpty {
             textView.text = "Type here"
         }
-        notes = text
+        transactionDict[.notes] = text
     }
 }

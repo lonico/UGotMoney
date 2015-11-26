@@ -61,6 +61,8 @@ struct AlertController {
         static let AuthenticationError = "Failed to connect or authenticate with server"
         static let QueryError = "Failed to query data from server"
         static let EmptyName = "Empty name"
+        static let EmptyList = "Empty list"
+        static let DuplicateEntry = "Duplicate Name"
         static let RefreshError = "Refresh error"
         static let OpenURLError = "Failed to open URL"
         static let MissingURLError = "Empty URL string"
