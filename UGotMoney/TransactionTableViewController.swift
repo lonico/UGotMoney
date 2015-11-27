@@ -29,7 +29,8 @@ class TransactionTableViewController: UIViewController, UITableViewDataSource, U
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cellWithSub", forIndexPath: indexPath) as UITableViewCell
         let transaction = transactions[indexPath.row]
-        cell.textLabel?.text = transaction.person.name + " " + Formatting.formattedCurrency(transaction.amountPaid)
+        cell.textLabel?.text = transaction.person.name + "    " + Formatting.formattedCurrency(transaction.amountPaid)
+        cell.textLabel?.textColor = UIColor.blueColor()
         cell.detailTextLabel?.text = [Formatting.formattedDate(transaction.paymentDate),
                                       Formatting.formattedDate(transaction.serviceDate),
                                       transaction.paymentType,
@@ -37,6 +38,14 @@ class TransactionTableViewController: UIViewController, UITableViewDataSource, U
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let transaction = transactions[indexPath.row]
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("transactionDetailsVC") as! TransactionDetailsViewController
+        vc.transaction = transaction
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
     // MARK: coredata
 
     func getTransactions() -> [Transaction] {

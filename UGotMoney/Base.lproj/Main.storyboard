@@ -1026,5 +1026,90 @@ If % is not used, the name search defaults to F% and the description search defa
             </objects>
             <point key="canvasLocation" x="5751" y="195"/>
         </scene>
+        <!--Transaction Details-->
+        <scene sceneID="kar-qa-Lqw">
+            <objects>
+                <viewController storyboardIdentifier="transactionDetailsVC" id="zdq-LE-KHA" customClass="TransactionDetailsViewController" customModule="UGotMoney" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bke-aY-DWh"/>
+                        <viewControllerLayoutGuide type="bottom" id="LGU-11-frq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fEU-yy-6TS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ueb-at-2aM">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="LabelAndTextFieldCell" editingAccessoryType="detailDisclosureButton" id="8IK-oi-o1c" customClass="LabelAndTextFieldCell" customModule="UGotMoney" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8IK-oi-o1c" id="Bfv-fK-C0q">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vdh-FH-8lg">
+                                                    <rect key="frame" x="18" y="14" width="84" height="18"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eK4-sy-tpy">
+                                                    <rect key="frame" x="142" y="13" width="430" height="20"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="Vdh-FH-8lg" firstAttribute="top" secondItem="Bfv-fK-C0q" secondAttribute="topMargin" constant="6" id="03U-oq-Vct"/>
+                                                <constraint firstItem="eK4-sy-tpy" firstAttribute="centerY" secondItem="Vdh-FH-8lg" secondAttribute="centerY" id="Qqk-G3-yVa"/>
+                                                <constraint firstItem="Vdh-FH-8lg" firstAttribute="leading" secondItem="Bfv-fK-C0q" secondAttribute="leadingMargin" constant="10" id="ZAS-MX-Rxk"/>
+                                                <constraint firstItem="eK4-sy-tpy" firstAttribute="leading" secondItem="Bfv-fK-C0q" secondAttribute="leadingMargin" constant="134" id="avi-fB-tUJ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="eK4-sy-tpy" secondAttribute="trailing" constant="20" id="nRx-56-VsL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <outlet property="cellLabel" destination="Vdh-FH-8lg" id="Ubq-dl-ln0"/>
+                                            <outlet property="cellTextField" destination="eK4-sy-tpy" id="UHs-Ml-qqd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TextViewCell" rowHeight="216" id="363-Te-0LR" customClass="TextViewCell" customModule="UGotMoney" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="600" height="216"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="363-Te-0LR" id="Tky-ci-E6d">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="215"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="zdq-LE-KHA" id="pM4-B8-KcD"/>
+                                    <outlet property="delegate" destination="zdq-LE-KHA" id="VK3-gS-UE2"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ueb-at-2aM" secondAttribute="trailing" constant="-20" id="7GS-Kw-efU"/>
+                            <constraint firstItem="ueb-at-2aM" firstAttribute="top" secondItem="bke-aY-DWh" secondAttribute="bottom" id="PUS-pH-yVj"/>
+                            <constraint firstItem="LGU-11-frq" firstAttribute="top" secondItem="ueb-at-2aM" secondAttribute="bottom" id="sJF-7J-cPp"/>
+                            <constraint firstItem="ueb-at-2aM" firstAttribute="leading" secondItem="fEU-yy-6TS" secondAttribute="leadingMargin" constant="-20" id="wPV-r7-dXi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Transaction Details" id="WZJ-Mw-Fsd" userLabel="Transaction Details"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ASP-R0-mx0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6420" y="195"/>
+        </scene>
     </scenes>
 </document>

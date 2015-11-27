@@ -35,6 +35,7 @@
 		C0A18A091C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A081C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift */; };
 		C0A18A0B1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */; };
 		C0A18A0D1C056C5E00F48B39 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */; };
+		C0A18A111C08E92A00F48B39 /* TransactionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A101C08E92A00F48B39 /* TransactionDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		C0A18A081C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICD10ResultsTableViewController.swift; sourceTree = "<group>"; };
 		C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICD10DetailsTableViewController.swift; sourceTree = "<group>"; };
 		C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
+		C0A18A101C08E92A00F48B39 /* TransactionDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */,
 				C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */,
 				C0A18A001BFEDC2300F48B39 /* TransactionTableViewController.swift */,
+				C0A18A101C08E92A00F48B39 /* TransactionDetailsViewController.swift */,
 				C0A18A061C01A1D000F48B39 /* SearchICDViewController.swift */,
 				C0A18A081C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift */,
 				C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */,
@@ -347,6 +350,7 @@
 				C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */,
 				C0A18A0D1C056C5E00F48B39 /* ClientTableViewController.swift in Sources */,
 				C0A189F71BF9333700F48B39 /* AddNewClientViewController.swift in Sources */,
+				C0A18A111C08E92A00F48B39 /* TransactionDetailsViewController.swift in Sources */,
 				C0A18A091C02AE8A00F48B39 /* ICD10ResultsTableViewController.swift in Sources */,
 				C0A189ED1BF8182C00F48B39 /* PersistentData.swift in Sources */,
 				C0A18A031C010A7C00F48B39 /* HttpClient.swift in Sources */,

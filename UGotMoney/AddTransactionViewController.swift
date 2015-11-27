@@ -21,7 +21,7 @@ class AddTransactionViewController: UIViewController {
         case datePicker
         case namePicker
         case textView
-        case textLabel
+        case textField
     }
     
     struct Choices {
@@ -241,7 +241,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         } else if row == 1 {
             cell = getCellForSecondRow(tableView, name: name, type: type)
         } else {
-            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: "ERROR: unexpected row: \(row)", type: .textLabel)
+            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: "ERROR: unexpected row: \(row)", type: .textField)
             print("ERROR: unexpected row: \(row)")
         }
         return cell
@@ -358,46 +358,41 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
             }
             cell = DatePickerViewCell.getCellForDatePickerView(tableView, controller: self, initialDate: initialDate)
         case .namePicker:
-            var selection: Int
+            var selection: Int! = nil
             var pickerView: UIPickerView!
             switch name {
             case .clientName:
                 pickerView = clientNamePickerView
-                selection = choices.clients.count / 2
                 if let value = transactionDict[name] as? String {
-                    selection = choices.clients.indexOf(value) ?? selection
+                    selection = choices.clients.indexOf(value)
                 }
             case .paymentValue:
                 pickerView = paymentValuePickerView
-                selection = choices.paymentValues.count / 2
                 if let value = transactionDict[name] as? Float {
-                    selection = choices.paymentValues.indexOf(value) ?? selection
+                    selection = choices.paymentValues.indexOf(value)
                 }
             case .paymentType:
                 pickerView = paymentTypePickerView
-                selection = choices.paymentTypes.count / 2
                 if let value = transactionDict[name] as? String {
-                    selection = choices.paymentTypes.indexOf(value) ?? selection
+                    selection = choices.paymentTypes.indexOf(value)
                 }
             case .icd10:
                 pickerView = ICDPickerView
-                selection = choices.ICDs.count / 2
                 if let value = transactionDict[name] as? String {
-                    selection = choices.ICDs.indexOf(value) ?? selection
+                    selection = choices.ICDs.indexOf(value)
                 }
             default:
                 error = "ERROR: unexpected name: \(name)"
                 pickerView = nil
-                selection = 0
             }
             if error == nil {
                 cell = NamePickerViewCell.getCellForNamePickerView(tableView, pickerView: pickerView!, controller: self, selected: selection)
             } else {
-                cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: .textLabel)
+                cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: .textField)
             }
         default:
             error = "ERROR: unexpected type: \(type)"
-            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: .textLabel)
+            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: .textField)
         }
         return cell
     }
