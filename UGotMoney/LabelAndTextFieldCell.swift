@@ -13,7 +13,7 @@ class LabelAndTextFieldCell: UITableViewCell {
     @IBOutlet var cellLabel: UILabel!
     @IBOutlet var cellTextField: UITextField!
 
-    static func getCellForLabelAndText(tableView: UITableView, name: String, type: InputViewController.FieldType) -> UITableViewCell {
+    static func getCellForLabelAndText(tableView: UITableView, name: String, type: AddTransactionViewController.FieldType) -> UITableViewCell {
         let identifier = "LabelAndTextFieldCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LabelAndTextFieldCell
         cell.cellLabel.text = name

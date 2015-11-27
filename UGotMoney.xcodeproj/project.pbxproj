@@ -14,7 +14,7 @@
 		C080687A1BE6EA8E001C5B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08068781BE6EA8E001C5B9A /* LaunchScreen.storyboard */; };
 		C08068851BE6EA8E001C5B9A /* UGotMoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068841BE6EA8E001C5B9A /* UGotMoneyTests.swift */; };
 		C08068901BE6EA8E001C5B9A /* UGotMoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080688F1BE6EA8E001C5B9A /* UGotMoneyUITests.swift */; };
-		C080689E1BE6F5D2001C5B9A /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080689D1BE6F5D2001C5B9A /* InputViewController.swift */; };
+		C080689E1BE6F5D2001C5B9A /* AddTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080689D1BE6F5D2001C5B9A /* AddTransactionViewController.swift */; };
 		C08068E91BEE8925001C5B9A /* DatePickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */; };
 		C08068EA1BEE8925001C5B9A /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E61BEE8925001C5B9A /* Formatting.swift */; };
 		C08068EB1BEE8925001C5B9A /* LabelAndTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */; };
@@ -68,17 +68,17 @@
 		C080688B1BE6EA8E001C5B9A /* UGotMoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UGotMoneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C080688F1BE6EA8E001C5B9A /* UGotMoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UGotMoneyUITests.swift; sourceTree = "<group>"; };
 		C08068911BE6EA8E001C5B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C080689D1BE6F5D2001C5B9A /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		C080689D1BE6F5D2001C5B9A /* AddTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddTransactionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C08068E51BEE8925001C5B9A /* DatePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewCell.swift; sourceTree = "<group>"; };
 		C08068E61BEE8925001C5B9A /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
-		C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelAndTextFieldCell.swift; sourceTree = "<group>"; };
+		C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LabelAndTextFieldCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePickerViewCell.swift; sourceTree = "<group>"; };
 		C08068ED1BEEB153001C5B9A /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		C0A189E81BF805FD00F48B39 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		C0A189EA1BF80BCB00F48B39 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		C0A189EC1BF8182C00F48B39 /* PersistentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		C0A189EE1BF81D8800F48B39 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
-		C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPickerValuesViewController.swift; sourceTree = "<group>"; };
+		C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditPickerValuesViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTextFieldViewController.swift; path = ../InputTextFieldViewController.swift; sourceTree = "<group>"; };
 		C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewClientViewController.swift; sourceTree = "<group>"; };
 		C0A189FE1BFED3CA00F48B39 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */,
 				C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */,
 				C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */,
-				C080689D1BE6F5D2001C5B9A /* InputViewController.swift */,
+				C080689D1BE6F5D2001C5B9A /* AddTransactionViewController.swift */,
 				C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */,
 				C0A18A001BFEDC2300F48B39 /* TransactionTableViewController.swift */,
 				C0A18A061C01A1D000F48B39 /* SearchICDViewController.swift */,
@@ -363,7 +363,7 @@
 				C080686D1BE6EA8D001C5B9A /* AppDelegate.swift in Sources */,
 				C0A189F11BF83FCC00F48B39 /* EditPickerValuesViewController.swift in Sources */,
 				C0A18A071C01A1D000F48B39 /* SearchICDViewController.swift in Sources */,
-				C080689E1BE6F5D2001C5B9A /* InputViewController.swift in Sources */,
+				C080689E1BE6F5D2001C5B9A /* AddTransactionViewController.swift in Sources */,
 				C0A18A0B1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift in Sources */,
 				C0A189F51BF85D1200F48B39 /* InputTextFieldViewController.swift in Sources */,
 			);

@@ -1,5 +1,5 @@
 //
-//  InputViewController.swift
+//  AddTransactionViewController.swift
 //  UGotMoney
 //
 //  Created by Laurent Nicolas on 11/1/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InputViewController: UIViewController {
+class AddTransactionViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var editButton: UIBarButtonItem!
@@ -189,7 +189,7 @@ class InputViewController: UIViewController {
 
 }
 
-extension InputViewController: UITableViewDataSource, UITableViewDelegate {
+extension AddTransactionViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: UITableViewDataSource
     
@@ -213,7 +213,7 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
         
         var cell = UITableViewCell()
         if row == 0 {
-            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: InputViewController.getFieldLabel(name), type: type)
+            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: AddTransactionViewController.getFieldLabel(name), type: type)
             let acell = cell as! LabelAndTextFieldCell
             acell.cellTextField.text = getValue(name)
         } else if row == 1 {
@@ -258,7 +258,7 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
             }
             let (name, type) = sections[indexPath.section]
             if getCount(name) == 0 {
-                AlertController.Alert(msg: "please add value for \(InputViewController.getFieldLabel(name)) using the edit button (bottom left)", title: AlertController.AlertTitle.EmptyList).showAlert(self)
+                AlertController.Alert(msg: "please add value for \(AddTransactionViewController.getFieldLabel(name)) using the edit button (bottom left)", title: AlertController.AlertTitle.EmptyList).showAlert(self)
                 return
             }
             selectedCell = acell
@@ -496,7 +496,7 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
 
 }
 
-extension InputViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
+extension AddTransactionViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
     
     // MARK: UIPickerViewDataSource
     
@@ -580,7 +580,7 @@ extension InputViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
     }
 }
 
-extension InputViewController: UITextViewDelegate {
+extension AddTransactionViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(textView: UITextView) {
         if noteIsEmpty {
