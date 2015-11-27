@@ -168,7 +168,6 @@ class SearchICDViewController: UIViewController {
             newString = newString.substringToIndex(newString.endIndex.advancedBy(-1))
             print(">>>\(newString)")
         }
-        
         if has_prefix && has_suffix {
             query_suffix = "_cont"
         } else if has_prefix {

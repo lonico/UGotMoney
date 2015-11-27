@@ -19,6 +19,7 @@ class EditPickerValuesViewController: UIViewController {
     var paymentValues: [Float]!
     var paymentTypes: [String]!
     var ICDs: [String]!
+    var ICDDescriptions: [String:String]!
 
     override func viewWillAppear(animated: Bool) {
         
@@ -28,6 +29,7 @@ class EditPickerValuesViewController: UIViewController {
         paymentValues = PersistentData.getFees()
         paymentTypes = PersistentData.getPaymentTypes()
         ICDs = PersistentData.getICDs()
+        ICDDescriptions = PersistentData.getICDDescriptions()
         tableView.setEditing(true, animated: true)
     }
     
@@ -48,7 +50,7 @@ class EditPickerValuesViewController: UIViewController {
             let vc = storyboard?.instantiateViewControllerWithIdentifier("searchICDVC") as! SearchICDViewController
             navigationController?.pushViewController(vc, animated: true)
         default:
-            print_internal_error("\(__FUNCTION__)")
+            printInternalError("\(__FUNCTION__)")
         }
     }
     
@@ -67,14 +69,15 @@ class EditPickerValuesViewController: UIViewController {
         case .icd10:
             value =  ICDs.count
         default:
-            print_internal_error("\(__FUNCTION__)")
+            printInternalError("\(__FUNCTION__)")
         }
         return value
     }
     
-    func getValue(index: Int) -> String {
+    func getValue(index: Int) -> (String, String!) {
         
         var value = ""
+        var description: String! = nil
         switch pickerLabel! {
         case .clientName:
             value = clients[index]
@@ -84,13 +87,14 @@ class EditPickerValuesViewController: UIViewController {
             value = paymentTypes[index]
         case .icd10:
             value = ICDs[index]
+            description = ICDDescriptions[value]
         default:
-            print_internal_error("\(__FUNCTION__)")
+            printInternalError("\(__FUNCTION__)")
         }
-        return value
+        return (value, description)
     }
     
-    func deleteElement(index: Int) {
+    func deleteElement(index: Int, move: Bool) {
         switch pickerLabel! {
         case .clientName:
             let person = self.clientsDict[self.clients[index]]!
@@ -102,9 +106,12 @@ class EditPickerValuesViewController: UIViewController {
         case .paymentType:
             paymentTypes.removeAtIndex(index)
         case .icd10:
+            if !move {
+                ICDDescriptions.removeValueForKey(ICDs[index])
+            }
             ICDs.removeAtIndex(index)
         default:
-            print_internal_error("\(__FUNCTION__)")
+            printInternalError("\(__FUNCTION__)")
         }
     }
     
@@ -121,11 +128,11 @@ class EditPickerValuesViewController: UIViewController {
         case .icd10:
             ICDs.insert(value, atIndex: index)
         default:
-            print_internal_error("\(__FUNCTION__)")
+            printInternalError("\(__FUNCTION__)")
         }
     }
     
-    func addElement(value: AnyObject) {
+    func addElement(value: AnyObject, description: String!) {
         
         switch pickerLabel! {
         case .clientName:
@@ -144,9 +151,10 @@ class EditPickerValuesViewController: UIViewController {
         case .icd10:
             if !ICDs.contains(value as! String) {
                 ICDs.append(value as! String)
+                ICDDescriptions[value as! String] = description ?? ""
             }
         default:
-            print_internal_error("\(__FUNCTION__)")
+            printInternalError("\(__FUNCTION__)")
         }
     }
     
@@ -166,8 +174,9 @@ class EditPickerValuesViewController: UIViewController {
             PersistentData.storePaymentTypes(paymentTypes)
         case .icd10:
             PersistentData.storeICDs(ICDs)
+            PersistentData.storeICDDescriptions(ICDDescriptions)
         default:
-            print_internal_error("\(__FUNCTION__)")
+            printInternalError("\(__FUNCTION__)")
         }
     }
     
@@ -181,12 +190,12 @@ class EditPickerValuesViewController: UIViewController {
             value = .DecimalPad
         default:
             value = .ASCIICapable
-            print_internal_error("\(__FUNCTION__)")
+            printInternalError("\(__FUNCTION__)")
         }
         return value
     }
     
-    func print_internal_error(from: String) {
+    func printInternalError(from: String) {
         
         let msg = "ERROR: unexpected pickerType: \(pickerLabel) in \(from)"
         print(msg)
@@ -206,7 +215,11 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("basicCell")!
-        cell.textLabel?.text = getValue(indexPath.row)
+        let (value, description) = getValue(indexPath.row)
+        cell.textLabel?.text = value
+        if description != nil {
+            cell.detailTextLabel?.text = description
+        }
         return cell
     }
     
@@ -215,7 +228,7 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
         switch editingStyle {
         case .Delete:
             print(">>> deleting")
-            deleteElement(indexPath.row)
+            deleteElement(indexPath.row, move: false)
             saveData()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         default:
@@ -239,8 +252,8 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
             print("Move not supported for Client name")
             return
         }
-        let value = getValue(sourceIndexPath.row)
-        deleteElement(sourceIndexPath.row)
+        let (value, _) = getValue(sourceIndexPath.row)
+        deleteElement(sourceIndexPath.row, move: true)
         insertElement(value, index: destinationIndexPath.row)
         saveData()
     }
@@ -270,7 +283,7 @@ extension EditPickerValuesViewController: InputTextFieldViewControllerDelegate {
         
         navigationController?.popViewControllerAnimated(true)
         if value != nil {
-            addElement(value)
+            addElement(value, description: nil)
             saveData()
             tableView.reloadData()
         }
@@ -283,7 +296,7 @@ extension EditPickerValuesViewController: AddNewClientViewControllerDelegate {
         
         navigationController?.popViewControllerAnimated(true)
         if value != nil {
-            addElement(value.name)
+            addElement(value.name, description: nil)
             saveData()
             tableView.reloadData()
         }
@@ -292,11 +305,11 @@ extension EditPickerValuesViewController: AddNewClientViewControllerDelegate {
 
 extension EditPickerValuesViewController: ICD10DetailsTableViewControllerDelegate {
     
-    func didSelectICD(value: String!) {
+    func didSelectICD(value: String!, description: String!) {
         
         navigationController?.popToViewController(self, animated: true)
         if value != nil {
-            addElement(value)
+            addElement(value, description: description)
             saveData()
             tableView.reloadData()
         }

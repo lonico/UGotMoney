@@ -22,14 +22,10 @@ class TextViewCell: UITableViewCell {
             textView.textContainer.lineBreakMode = .ByWordWrapping
             cell.contentView.addSubview(textView)
             if textView.frame.width > tableView.frame.width {
-                print("Resizing \(textView.frame)")
                 textView.frame = CGRectMake(textView.frame.minX, textView.frame.minY, tableView.frame.width - 20, textView.frame.height)
             }
             cell.cellTextView = textView
             cell.contentView.addSubview(textView)
-            print(tableView.frame)
-            print(textView.frame)
-            print(cell.frame)
         }
         return cell
     }

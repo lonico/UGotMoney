@@ -20,7 +20,7 @@ class InputViewController: UIViewController {
     enum FieldType {
         case datePicker
         case namePicker
-        case textField
+        case textView
         case textLabel
     }
     
@@ -29,6 +29,7 @@ class InputViewController: UIViewController {
         var paymentValues: [Float]
         var paymentTypes: [String]
         var ICDs: [String]
+        var ICDDescriptions: [String: String]
     }
     
     var transactionDict: [Transaction.FieldName: AnyObject!] = [:]
@@ -44,11 +45,9 @@ class InputViewController: UIViewController {
     
     var selectedCell: LabelAndTextFieldCell!
     var selectedIndexPath: NSIndexPath! = nil
-    var expandedIndexPath: NSIndexPath! = nil
     var showSecondRow = false
     var secondRowCellIndex: NSIndexPath!
     var secondRowCellFieldName: Transaction.FieldName!
-    var secondRowCellFieldType: FieldType!
     
     var origin_y: CGFloat!
     
@@ -59,7 +58,7 @@ class InputViewController: UIViewController {
         (.paymentType, .namePicker),
         (.icd10, .namePicker),
         (.serviceDate, .datePicker),
-        (.notes, .textField)
+        (.notes, .textView)
     ]
     
     override func viewDidLoad() {
@@ -93,10 +92,12 @@ class InputViewController: UIViewController {
         choices = Choices(clients: Person.getClientNames(),
                           paymentValues: PersistentData.getFees(),
                           paymentTypes: PersistentData.getPaymentTypes(),
-                          ICDs: PersistentData.getICDs())
+                          ICDs: PersistentData.getICDs(),
+                          ICDDescriptions: PersistentData.getICDDescriptions())
         tableView.setEditing(false, animated: true)
         editButton.tintColor = UIColor.blueColor()
-        saveButton.enabled = false
+        enableSaveButton()
+        showSecondRow = false
         
         tableView.reloadData()
         clientNamePickerView.reloadAllComponents()
@@ -107,7 +108,7 @@ class InputViewController: UIViewController {
     
     // MARK: DatePicker actions
     
-    @IBAction func dateValueChanged(sender: UIDatePicker) {
+    func dateValueChanged(sender: UIDatePicker) {
         
         print(">>> dateValueChanged")
         if selectedCell.cellLabel.text == nil {
@@ -122,14 +123,8 @@ class InputViewController: UIViewController {
         switch secondRowCellFieldName! {
         case .paymentDate:
             transactionDict[.paymentDate] = sender.date
-            if transactionDict[.serviceDate] == nil {
-                transactionDict[.serviceDate] = sender.date
-            }
         case .serviceDate:
             transactionDict[.serviceDate] = sender.date
-            if transactionDict[.paymentDate] == nil {
-                transactionDict[.paymentDate] = sender.date
-            }
         default:
             print("Unexpected UIDatePicker dateValueChanged for \(selectedCell)")
         }
@@ -186,9 +181,9 @@ class InputViewController: UIViewController {
                              transactionDict[.paymentType] as! String != ""
     }
     
-    func print_internal_error() {
+    func printInternalError(from: String) {
         
-        let msg = "ERROR: unexpected pickerView"
+        let msg = "ERROR: unexpected pickerView in \(from)"
         print(msg)
     }
 
@@ -204,7 +199,7 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let (_, type) = sections[section]
-        if type == .datePicker || type == .namePicker || type == .textField {
+        if type == .datePicker || type == .namePicker || type == .textView {
             return 2
         }
         return 1
@@ -252,26 +247,28 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
             let acell = tableView.cellForRowAtIndexPath(indexPath) as! LabelAndTextFieldCell
             if showSecondRow {
                 showSecondRow = false
-                tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
+                if setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName) {
+                    acell.detailTextLabel?.text = getValue(secondRowCellFieldName)
+                }
+                tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
                 if selectedCell == acell {
                     selectedCell = nil
                     return
                 }
             }
-            //let acell = tableView.cellForRowAtIndexPath(indexPath) as! LabelAndTextFieldCell
             let (name, type) = sections[indexPath.section]
             if getCount(name) == 0 {
                 AlertController.Alert(msg: "please add value for \(InputViewController.getFieldLabel(name)) using the edit button (bottom left)", title: AlertController.AlertTitle.EmptyList).showAlert(self)
                 return
             }
             selectedCell = acell
+            selectedIndexPath = indexPath
             switch type {
-            case .datePicker, .namePicker, .textField:
+            case .datePicker, .namePicker, .textView:
                 showSecondRow = true
                 secondRowCellIndex = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
                 tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
                 secondRowCellFieldName = name
-                secondRowCellFieldType = type
             default:
                 break
             }
@@ -318,10 +315,20 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
         var cell: UITableViewCell
         var error: String! = nil
         switch(type) {
-        case.textField:
+        case.textView:
             cell = TextViewCell.getCellForTextView(tableView, textView: noteTextView)
         case .datePicker:
-            cell = DatePickerViewCell.getCellForDatePickerView(tableView)
+            var  initialDate: NSDate
+            switch name {
+            case .paymentDate:
+                initialDate = transactionDict[.paymentDate] as? NSDate ?? NSDate()
+            case .serviceDate:
+                initialDate = transactionDict[.serviceDate] as? NSDate ?? transactionDict[.paymentDate] as? NSDate ?? NSDate()
+            default:
+                printInternalError("\(__FUNCTION__)")
+                initialDate = NSDate()
+            }
+            cell = DatePickerViewCell.getCellForDatePickerView(tableView, controller: self, initialDate: initialDate)
         case .namePicker:
             var selection: Int
             var pickerView: UIPickerView!
@@ -329,15 +336,27 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
             case .clientName:
                 pickerView = clientNamePickerView
                 selection = choices.clients.count / 2
+                if let value = transactionDict[name] as? String {
+                    selection = choices.clients.indexOf(value) ?? selection
+                }
             case .paymentValue:
                 pickerView = paymentValuePickerView
                 selection = choices.paymentValues.count / 2
+                if let value = transactionDict[name] as? Float {
+                    selection = choices.paymentValues.indexOf(value) ?? selection
+                }
             case .paymentType:
                 pickerView = paymentTypePickerView
                 selection = choices.paymentTypes.count / 2
+                if let value = transactionDict[name] as? String {
+                    selection = choices.paymentTypes.indexOf(value) ?? selection
+                }
             case .icd10:
                 pickerView = ICDPickerView
                 selection = choices.ICDs.count / 2
+                if let value = transactionDict[name] as? String {
+                    selection = choices.ICDs.indexOf(value) ?? selection
+                }
             default:
                 error = "ERROR: unexpected name: \(name)"
                 pickerView = nil
@@ -353,6 +372,31 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
             cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: .textLabel)
         }
         return cell
+    }
+    
+    func setValueFromSecondRow(indexPath: NSIndexPath, name: Transaction.FieldName) -> Bool {
+        
+        switch (name) {
+        case .clientName:
+            let row = clientNamePickerView.selectedRowInComponent(0)
+            transactionDict[name] = choices.clients[row]
+        case .paymentValue:
+            let row = paymentValuePickerView.selectedRowInComponent(0)
+            transactionDict[name] = choices.paymentValues[row]
+        case .paymentType:
+            let row = paymentTypePickerView.selectedRowInComponent(0)
+            transactionDict[name] = choices.paymentTypes[row]
+        case .icd10:
+            let row = ICDPickerView.selectedRowInComponent(0)
+            transactionDict[name] = choices.ICDs[row]
+        case .serviceDate:
+            let cell  = tableView.cellForRowAtIndexPath(indexPath) as! DatePickerViewCell
+            transactionDict[name] = cell.cellPickerView.date
+        default:
+            return false
+        }
+        enableSaveButton()
+        return true
     }
     
     func keyboardWillShow(sender: NSNotification) {
@@ -372,11 +416,13 @@ extension InputViewController: UITableViewDataSource, UITableViewDelegate {
         transactionDict[.paymentValue] = nil
         transactionDict[.paymentType] = ""
         transactionDict[.icd10] = ""
+        transactionDict[.paymentDate] = nil
         transactionDict[.serviceDate] = nil
         //paymentDate = nil
         transactionDict[.notes] = ""
         noteIsEmpty = true
         noteTextView.text = ""
+        enableSaveButton()
     }
     
     func getValue(name: Transaction.FieldName) -> String {
@@ -494,7 +540,7 @@ extension InputViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
             case ICDPickerView:
                 transactionDict[.icd10] = text
             default:
-                print_internal_error()
+                printInternalError("\(__FUNCTION__)")
             }
             enableSaveButton()
         }
@@ -525,7 +571,7 @@ extension InputViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
             }
         case ICDPickerView:
             if choices.ICDs.count > 0 {
-                value = choices.ICDs[row]
+                value = choices.ICDs[row] // + " - " + (choices.ICDDescriptions[choices.ICDs[row]] ?? "")
             }
         default:
             break

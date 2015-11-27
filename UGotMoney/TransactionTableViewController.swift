@@ -20,16 +20,6 @@ class TransactionTableViewController: UIViewController, UITableViewDataSource, U
         transactions = getTransactions()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return transactions.count
@@ -40,8 +30,10 @@ class TransactionTableViewController: UIViewController, UITableViewDataSource, U
         let cell = tableView.dequeueReusableCellWithIdentifier("cellWithSub", forIndexPath: indexPath) as UITableViewCell
         let transaction = transactions[indexPath.row]
         cell.textLabel?.text = transaction.person.name + " " + Formatting.formattedCurrency(transaction.amountPaid)
-        cell.detailTextLabel?.text = Formatting.formattedDate(transaction.paymentDate) + " - " + Formatting.formattedDate(transaction.serviceDate) + " - " + transaction.paymentType
-        
+        cell.detailTextLabel?.text = [Formatting.formattedDate(transaction.paymentDate),
+                                      Formatting.formattedDate(transaction.serviceDate),
+                                      transaction.paymentType,
+                                      transaction.icd10].joinWithSeparator(" - ")
         return cell
     }
     
@@ -55,7 +47,6 @@ class TransactionTableViewController: UIViewController, UITableViewDataSource, U
             print("Fetch error, \(error.localizedDescription)")
             return []
         }
-        
         if let fetchedObjects = fetchedResultsController.fetchedObjects as? [Transaction] {
             return fetchedObjects
         }
@@ -70,7 +61,6 @@ class TransactionTableViewController: UIViewController, UITableViewDataSource, U
         if self.person != nil {
             request.predicate = NSPredicate(format: "person == %@", self.person)
         }
-        
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultsController

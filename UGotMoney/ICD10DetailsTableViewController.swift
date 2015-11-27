@@ -9,7 +9,8 @@
 import UIKit
 
 protocol ICD10DetailsTableViewControllerDelegate {
-    func didSelectICD(value: String!)
+    
+    func didSelectICD(value: String!, description: String!)
 }
 
 class ICD10DetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -17,7 +18,6 @@ class ICD10DetailsTableViewController: UIViewController, UITableViewDataSource, 
     var details: [[String: AnyObject]]!
     var mainTitle: String!
     var subtitle: String!
-    
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
@@ -94,10 +94,9 @@ class ICD10DetailsTableViewController: UIViewController, UITableViewDataSource, 
     
     @IBAction func addButtonTouchUp(sender: UIBarButtonItem) {
         
-        print("ADD ACTION TBD")
         for vc in (navigationController?.viewControllers)! {
             if vc.isKindOfClass(EditPickerValuesViewController) {
-                 (vc as! EditPickerValuesViewController).didSelectICD(mainTitle)
+                 (vc as! EditPickerValuesViewController).didSelectICD(mainTitle, description: subtitle)
             }
         }
     }
@@ -107,7 +106,6 @@ class ICD10DetailsTableViewController: UIViewController, UITableViewDataSource, 
     func getDataForIndexPath(indexPath: NSIndexPath) -> (String, String!, Bool) {
         
         let (type, key, value, object) = getMoreForIndexPath(indexPath)
-        
         if type == .array {
             let array = object as! [String]
             return (key, array.joinWithSeparator(" - "), false)
@@ -203,5 +201,4 @@ class ICD10DetailsTableViewController: UIViewController, UITableViewDataSource, 
         label += ">"
         return label
     }
-
 }

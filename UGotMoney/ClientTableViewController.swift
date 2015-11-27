@@ -70,7 +70,7 @@ extension ClientTableViewController: UITableViewDataSource {
         let person = clients[indexPath.row]
         cell.textLabel?.text = person.name
         if person.transactions.count > 0 {
-            cell.accessoryType = .DetailButton
+            cell.accessoryType = .DisclosureIndicator
         }
         if !person.active {
             cell.textLabel?.textColor = UIColor.lightGrayColor()

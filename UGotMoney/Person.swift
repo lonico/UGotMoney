@@ -80,11 +80,17 @@ class Person: NSManagedObject {
     
     var name: String {
         
+        if middleName == "" {
+            return [firstName, lastName].joinWithSeparator(" ")
+        }
         return [firstName, middleName, lastName].joinWithSeparator(" ")
     }
     
     static func name(firstName: String, middleName: String, lastName: String) -> String {
         
+        if middleName == "" {
+            return [firstName, lastName].joinWithSeparator(" ")
+        }
         return [firstName, middleName, lastName].joinWithSeparator(" ")
     }
     
