@@ -26,7 +26,7 @@
         <!--Add Payment-->
         <scene sceneID="nu3-sG-Otg">
             <objects>
-                <viewController id="bUN-ao-pSG" customClass="InputViewController" customModule="UGotMoney" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bUN-ao-pSG" customClass="AddTransactionViewController" customModule="UGotMoney" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1bl-ry-GSa"/>
                         <viewControllerLayoutGuide type="bottom" id="Ewv-QJ-S4v"/>

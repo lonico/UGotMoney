@@ -43,14 +43,21 @@ class AddTransactionViewController: UIViewController {
     var noteTextView: UITextView!
     var noteIsEmpty = true
     
+    // The UI is a table.  Each section contains 1 or 2 rows:
+    //   the first row is a label and a value
+    //   the second row is hidden by default.  It provides a widget
+    //    to enter data (pickerView, textView), ...
+    
+    // if showSecondRow is false, the other variables are undefined
+    // if true, they are used to manage the section
+    var showSecondRow = false
     var selectedCell: LabelAndTextFieldCell!
     var selectedIndexPath: NSIndexPath! = nil
-    var showSecondRow = false
     var secondRowCellIndex: NSIndexPath!
     var secondRowCellFieldName: Transaction.FieldName!
     
-    var origin_y: CGFloat!
-    
+    // For each section, the field being edited and
+    // the type of the UIControl for the second row
     let sections: [(Transaction.FieldName, FieldType)] = [
         (.paymentDate, .datePicker),
         (.clientName, .namePicker),
@@ -60,6 +67,8 @@ class AddTransactionViewController: UIViewController {
         (.serviceDate, .datePicker),
         (.notes, .textView)
     ]
+    
+    var origin_y: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +115,7 @@ class AddTransactionViewController: UIViewController {
         ICDPickerView.reloadAllComponents()
     }
     
-    // MARK: DatePicker actions
+    // MARK: DatePicker and PickerView actions
     
     func dateValueChanged(sender: UIDatePicker) {
         
@@ -130,6 +139,19 @@ class AddTransactionViewController: UIViewController {
         }
     }
 
+    func longPressActionPickerView(sender: UIPickerView) {
+        
+        // Work-around for IOS issue.  Close the pickerView on a long press
+        print("I was HERE")
+        if showSecondRow {
+            showSecondRow = false
+            if setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName) {
+                selectedCell.detailTextLabel?.text = getValue(secondRowCellFieldName)
+            }
+            tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
+        }
+     }
+    
     // MARK: action buttons
     
     @IBAction func EditButtonAction(sender: UIBarButtonItem) {
@@ -242,6 +264,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(">>> didSelect \(indexPath.section)")
         tableView.endEditing(true)
         if indexPath.row == 0 {
             let acell = tableView.cellForRowAtIndexPath(indexPath) as! LabelAndTextFieldCell
@@ -273,6 +296,11 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
                 break
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        print(">>> didDeselect \(indexPath.section)")
     }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
@@ -363,7 +391,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
                 selection = 0
             }
             if error == nil {
-                cell = NamePickerViewCell.getCellForNamePickerView(tableView, pickerView: pickerView!, selected: selection)
+                cell = NamePickerViewCell.getCellForNamePickerView(tableView, pickerView: pickerView!, controller: self, selected: selection)
             } else {
                 cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: error, type: .textLabel)
             }
@@ -492,8 +520,6 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         }
         return value
     }
-    
-
 }
 
 extension AddTransactionViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
