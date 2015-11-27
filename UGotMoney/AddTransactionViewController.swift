@@ -120,15 +120,17 @@ class AddTransactionViewController: UIViewController {
     func dateValueChanged(sender: UIDatePicker) {
         
         print(">>> dateValueChanged")
-        if selectedCell.cellLabel.text == nil {
+        if selectedCell == nil || selectedCell.cellLabel.text == nil {
             print("Unexpected UIDatePicker dateValueChanged (nil) for \(selectedCell)")
             return
+        }
+        if selectedIndexPath == nil {
+            print("Unexpected selectedIndexPath (nil) for \(selectedCell)")
         }
         if secondRowCellFieldName == nil {
             print("Unexpected secondRowCellType (nil) for \(selectedCell)")
             return
         }
-        selectedCell.cellTextField.text = Formatting.formattedDate(sender.date)
         switch secondRowCellFieldName! {
         case .paymentDate:
             transactionDict[.paymentDate] = sender.date
@@ -137,6 +139,8 @@ class AddTransactionViewController: UIViewController {
         default:
             print("Unexpected UIDatePicker dateValueChanged for \(selectedCell)")
         }
+        tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+
     }
 
     func longPressActionPickerView(sender: UIPickerView) {
@@ -145,9 +149,7 @@ class AddTransactionViewController: UIViewController {
         print("I was HERE")
         if showSecondRow {
             showSecondRow = false
-            if setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName) {
-                selectedCell.detailTextLabel?.text = getValue(secondRowCellFieldName)
-            }
+            setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName)
             tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
         }
      }
@@ -293,7 +295,8 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
                 tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
                 secondRowCellFieldName = name
             default:
-                break
+                secondRowCellFieldName = nil
+                printInternalError("\(__FUNCTION__)")
             }
         }
     }
@@ -330,7 +333,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if selectedCell != nil && indexPath == secondRowCellIndex && secondRowCellFieldName == Transaction.FieldName.notes {
+        if secondRowCellIndex != nil && indexPath == secondRowCellIndex && secondRowCellFieldName == Transaction.FieldName.notes {
             noteTextView.editable = true
             noteTextView.becomeFirstResponder()
         }
@@ -548,7 +551,6 @@ extension AddTransactionViewController: UIPickerViewDataSource,  UIPickerViewDel
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(">>> Selected: \(component) - \(row)")
         if let text = self.pickerView(pickerView, titleForRow: row, forComponent: component) {
-            selectedCell.cellTextField.text = text
             selectedCell.selected = false
             showSecondRow = false
             switch pickerView {
@@ -565,7 +567,7 @@ extension AddTransactionViewController: UIPickerViewDataSource,  UIPickerViewDel
             }
             enableSaveButton()
         }
-        tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
