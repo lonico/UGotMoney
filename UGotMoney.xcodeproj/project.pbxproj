@@ -20,6 +20,7 @@
 		C08068EB1BEE8925001C5B9A /* LabelAndTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */; };
 		C08068EC1BEE8925001C5B9A /* NamePickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */; };
 		C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068ED1BEEB153001C5B9A /* TextViewCell.swift */; };
+		C096EF311C0BFACD002624D2 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C096EF301C0BFACD002624D2 /* RoundedButton.swift */; };
 		C0A189E91BF805FD00F48B39 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189E81BF805FD00F48B39 /* Person.swift */; };
 		C0A189EB1BF80BCB00F48B39 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EA1BF80BCB00F48B39 /* Transaction.swift */; };
 		C0A189ED1BF8182C00F48B39 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EC1BF8182C00F48B39 /* PersistentData.swift */; };
@@ -75,6 +76,7 @@
 		C08068E71BEE8925001C5B9A /* LabelAndTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LabelAndTextFieldCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePickerViewCell.swift; sourceTree = "<group>"; };
 		C08068ED1BEEB153001C5B9A /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		C096EF301C0BFACD002624D2 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		C0A189E81BF805FD00F48B39 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		C0A189EA1BF80BCB00F48B39 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		C0A189EC1BF8182C00F48B39 /* PersistentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				C08068ED1BEEB153001C5B9A /* TextViewCell.swift */,
 				C0A189EE1BF81D8800F48B39 /* AlertController.swift */,
 				C080689D1BE6F5D2001C5B9A /* AddTransactionViewController.swift */,
+				C096EF301C0BFACD002624D2 /* RoundedButton.swift */,
 				C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */,
 				C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */,
 				C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */,
@@ -283,6 +286,7 @@
 				TargetAttributes = {
 					C08068681BE6EA8D001C5B9A = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = DZY4SPA4J6;
 					};
 					C080687F1BE6EA8E001C5B9A = {
 						CreatedOnToolsVersion = 7.1;
@@ -367,6 +371,7 @@
 				C080686D1BE6EA8D001C5B9A /* AppDelegate.swift in Sources */,
 				C0A189F11BF83FCC00F48B39 /* EditPickerValuesViewController.swift in Sources */,
 				C0A18A071C01A1D000F48B39 /* SearchICDViewController.swift in Sources */,
+				C096EF311C0BFACD002624D2 /* RoundedButton.swift in Sources */,
 				C080689E1BE6F5D2001C5B9A /* AddTransactionViewController.swift in Sources */,
 				C0A18A0B1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift in Sources */,
 				C0A189F51BF85D1200F48B39 /* InputTextFieldViewController.swift in Sources */,
@@ -441,6 +446,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -463,6 +469,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -485,6 +492,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -500,6 +508,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -509,10 +518,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = UGotMoney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lonico77.UGotMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -520,10 +532,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = UGotMoney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lonico77.UGotMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -554,10 +569,12 @@
 		C080689B1BE6EA8E001C5B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = UGotMoneyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lonico77.UGotMoneyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = UGotMoney;
 				USES_XCTRUNNER = YES;
 			};
@@ -566,10 +583,12 @@
 		C080689C1BE6EA8E001C5B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = UGotMoneyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lonico77.UGotMoneyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = UGotMoney;
 				USES_XCTRUNNER = YES;
 			};

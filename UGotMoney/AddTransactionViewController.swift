@@ -240,6 +240,9 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
             cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: AddTransactionViewController.getFieldLabel(name), type: type)
             let acell = cell as! LabelAndTextFieldCell
             acell.cellTextField.text = getValue(name)
+            if showSecondRow {
+                acell.cellDoneButton.hidden = selectedIndexPath != indexPath
+            }
         } else if row == 1 {
             cell = getCellForSecondRow(tableView, name: name, type: type)
         } else {
@@ -272,12 +275,10 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
             let acell = tableView.cellForRowAtIndexPath(indexPath) as! LabelAndTextFieldCell
             if showSecondRow {
                 showSecondRow = false
-                if setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName) {
-                    acell.detailTextLabel?.text = getValue(secondRowCellFieldName)
-                }
+                setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName)
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
-                if selectedCell == acell {
-                    selectedCell = nil
+                if selectedIndexPath == indexPath {
+                    selectedIndexPath = nil
                     return
                 }
             }
@@ -292,8 +293,8 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
             case .datePicker, .namePicker, .textView:
                 showSecondRow = true
                 secondRowCellIndex = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-                tableView.reloadRowsAtIndexPaths([secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
                 secondRowCellFieldName = name
+                tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
             default:
                 secondRowCellFieldName = nil
                 printInternalError("\(__FUNCTION__)")

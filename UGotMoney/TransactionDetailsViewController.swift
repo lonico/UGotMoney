@@ -42,6 +42,7 @@ class TransactionDetailsViewController: UIViewController {
 
 extension TransactionDetailsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    // MARK: tableview data source
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -62,8 +63,13 @@ extension TransactionDetailsViewController: UITableViewDataSource, UITableViewDe
         case .textView:
             if name == .icd10 {
                 cell = TextViewCell.getCellForTextView(tableView, textView: icdTextView)
-                let acell = cell as! TextViewCell
-                acell.cellTextView.text = ICDDescriptions[transaction.icd10] ?? ""
+                let icdvalue = getValue(name)
+                if icdvalue == "" {
+                    cell.hidden = true
+                } else {
+                    let acell = cell as! TextViewCell
+                    acell.cellTextView.text = ICDDescriptions[icdvalue] ?? ""
+                }
             } else {
                 cell = TextViewCell.getCellForTextView(tableView, textView: noteTextView)
                 let acell = cell as! TextViewCell
@@ -76,6 +82,8 @@ extension TransactionDetailsViewController: UITableViewDataSource, UITableViewDe
         return cell
     }
     
+    // MARK: tableview delegates
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         let (name, type) = rows[indexPath.row]
@@ -84,8 +92,15 @@ extension TransactionDetailsViewController: UITableViewDataSource, UITableViewDe
             let acell = tableView.dequeueReusableCellWithIdentifier(identifier) as! TextViewCell
             return acell.frame.size.height
         }
+        if name == .icd10 && type == .textView {
+            if getValue(name) == "" {
+                return 0
+            }
+        }
         return tableView.rowHeight
     }
+    
+    // MARK: Utilities
     
     func getValue(name: Transaction.FieldName) -> String {
         
