@@ -24,8 +24,8 @@ class EditPickerValuesViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         
         print(">>> editPickerValues \(__FUNCTION__)")
-        clientsDict = Person.getClientNamesDict()
-        clients = Person.getClientNames()
+        clientsDict = Person.getClientNamesDict(true)
+        clients = Person.getClientNames(activeOnly: true)
         paymentValues = PersistentData.getFees()
         paymentTypes = PersistentData.getPaymentTypes()
         ICDs = PersistentData.getICDs()
@@ -219,6 +219,8 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
         cell.textLabel?.text = value
         if description != nil {
             cell.detailTextLabel?.text = description
+        } else {
+            cell.detailTextLabel?.text = ""
         }
         return cell
     }

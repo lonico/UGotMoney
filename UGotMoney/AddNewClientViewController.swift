@@ -52,8 +52,25 @@ class AddNewClientViewController: UIViewController {
         let middleName = middleNameTF.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         let lastName = lastNameTF.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         let name = Person.name(firstName, middleName: middleName, lastName: lastName)
-        if Person.getClientNamesLowerCase().contains(name.lowercaseString) {
+        if Person.getClientNamesLowerCase(activeOnly: true).contains(name.lowercaseString) {
             AlertController.Alert(msg: "A person with the same name already exists", title: AlertController.AlertTitle.DuplicateEntry).showAlert(self)
+            return
+        }
+        if Person.getClientNamesLowerCase(activeOnly: false).contains(name.lowercaseString) {
+            let alert = AlertController.Alert(msg: "An inactive person with the same name already exists - do you want to reactivate this client?", title: AlertController.AlertTitle.DuplicateEntry, style: .ActionSheet) { action in
+    
+                if action.title == AlertController.AlertActionTitle.Enable {
+                    let person = Person.getPerson(name, activeOnly: false)
+                    person.activate()
+                    let nserror = CoreDataStackManager.sharedInstance().saveContext()
+                    if nserror != nil {
+                        AlertController.Alert(msg: nserror.localizedDescription, title: "Error!").showAlert(self)
+                    } else {
+                        self.delegate.didFinishAddingClient(person)
+                    }
+                }
+            }
+            alert.showAlert(self)
             return
         }
         let context = CoreDataStackManager.sharedInstance().managedObjectContext

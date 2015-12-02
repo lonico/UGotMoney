@@ -13,11 +13,20 @@ struct AlertController {
     struct Alert {
         let msg: String?
         let title: String?
+        let style: UIAlertControllerStyle
         let handler: ((UIAlertAction) -> Void)?
         
         init(msg: String?, title: String?, handler: ((UIAlertAction) -> Void)? = nil) {
             self.msg = msg
             self.title = title
+            self.style = .Alert
+            self.handler = handler
+        }
+
+        init(msg: String?, title: String?, style: UIAlertControllerStyle, handler: ((UIAlertAction) -> Void)? = nil) {
+            self.msg = msg
+            self.title = title
+            self.style = style
             self.handler = handler
         }
         
@@ -27,8 +36,9 @@ struct AlertController {
             if valid_title == nil {
                 valid_title = AlertTitle.Generic
             }
-            let alertController = UIAlertController(title: valid_title, message: msg, preferredStyle: .Alert)
+            let alertController = UIAlertController(title: valid_title, message: msg, preferredStyle: style)
             var cancelAction: UIAlertAction
+            var confirmAction: UIAlertAction
             if handler == nil {
                 cancelAction = UIAlertAction(title: AlertActionTitle.Dismiss, style: UIAlertActionStyle.Cancel, handler: nil)
             } else {
@@ -36,7 +46,20 @@ struct AlertController {
                     self.handler!(action)
                 }
             }
+            if (style == .ActionSheet) {
+                if handler == nil {
+                    confirmAction = UIAlertAction(title: AlertActionTitle.Enable, style: UIAlertActionStyle.Default) { action in
+                        self.handler!(action)
+                    }
+                }else {
+                    confirmAction = UIAlertAction(title: AlertActionTitle.Enable, style: UIAlertActionStyle.Default) { action in
+                        self.handler!(action)
+                    }
+                }
+                alertController.addAction(confirmAction)
+            }
             alertController.addAction(cancelAction)
+            
             vc.presentViewController(alertController, animated: true, completion: nil)
         }
         
@@ -75,5 +98,6 @@ struct AlertController {
     struct AlertActionTitle {
         
         static let Dismiss = "Dismiss"
+        static let Enable = "Enable"
     }
 }

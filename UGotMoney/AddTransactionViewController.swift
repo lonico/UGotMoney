@@ -51,7 +51,6 @@ class AddTransactionViewController: UIViewController {
     // if showSecondRow is false, the other variables are undefined
     // if true, they are used to manage the section
     var showSecondRow = false
-    var selectedCell: LabelAndTextFieldCell!
     var selectedIndexPath: NSIndexPath! = nil
     var secondRowCellIndex: NSIndexPath!
     var secondRowCellFieldName: Transaction.FieldName!
@@ -80,17 +79,22 @@ class AddTransactionViewController: UIViewController {
         clientNamePickerView = UIPickerView()
         clientNamePickerView.dataSource = self
         clientNamePickerView.delegate = self
+        
         paymentValuePickerView = UIPickerView()
         paymentValuePickerView.dataSource = self
         paymentValuePickerView.delegate = self
+        
         paymentTypePickerView = UIPickerView()
         paymentTypePickerView.dataSource = self
         paymentTypePickerView.delegate = self
+        
         ICDPickerView = UIPickerView()
         ICDPickerView.dataSource = self
         ICDPickerView.delegate = self
+        
         noteTextView = UITextView()
         noteTextView.delegate = self
+        
         resetValues()
     }
     
@@ -98,7 +102,7 @@ class AddTransactionViewController: UIViewController {
         print(">>> \(__FUNCTION__)")
         
         super.viewWillAppear(animated)
-        choices = Choices(clients: Person.getClientNames(),
+        choices = Choices(clients: Person.getClientNames(activeOnly: true),
                           paymentValues: PersistentData.getFees(),
                           paymentTypes: PersistentData.getPaymentTypes(),
                           ICDs: PersistentData.getICDs(),
@@ -120,15 +124,11 @@ class AddTransactionViewController: UIViewController {
     func dateValueChanged(sender: UIDatePicker) {
         
         print(">>> dateValueChanged")
-        if selectedCell == nil || selectedCell.cellLabel.text == nil {
-            print("Unexpected UIDatePicker dateValueChanged (nil) for \(selectedCell)")
-            return
-        }
         if selectedIndexPath == nil {
-            print("Unexpected selectedIndexPath (nil) for \(selectedCell)")
+            print("Unexpected selectedIndexPath (nil)")
         }
         if secondRowCellFieldName == nil {
-            print("Unexpected secondRowCellType (nil) for \(selectedCell)")
+            print("Unexpected secondRowCellType (nil) for \(selectedIndexPath)")
             return
         }
         switch secondRowCellFieldName! {
@@ -137,7 +137,7 @@ class AddTransactionViewController: UIViewController {
         case .serviceDate:
             transactionDict[.serviceDate] = sender.date
         default:
-            print("Unexpected UIDatePicker dateValueChanged for \(selectedCell)")
+            print("Unexpected UIDatePicker dateValueChanged for \(selectedIndexPath)")
         }
         tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
 
@@ -272,9 +272,9 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         print(">>> didSelect \(indexPath.section)")
         tableView.endEditing(true)
         if indexPath.row == 0 {
-            let acell = tableView.cellForRowAtIndexPath(indexPath) as! LabelAndTextFieldCell
             if showSecondRow {
                 showSecondRow = false
+                ////view.frame.origin.y = origin_y
                 setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName)
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
                 if selectedIndexPath == indexPath {
@@ -287,7 +287,6 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
                 AlertController.Alert(msg: "please add value for \(AddTransactionViewController.getFieldLabel(name)) using the edit button (bottom left)", title: AlertController.AlertTitle.EmptyList).showAlert(self)
                 return
             }
-            selectedCell = acell
             selectedIndexPath = indexPath
             switch type {
             case .datePicker, .namePicker, .textView:
@@ -552,7 +551,6 @@ extension AddTransactionViewController: UIPickerViewDataSource,  UIPickerViewDel
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(">>> Selected: \(component) - \(row)")
         if let text = self.pickerView(pickerView, titleForRow: row, forComponent: component) {
-            selectedCell.selected = false
             showSecondRow = false
             switch pickerView {
             case clientNamePickerView:
@@ -615,7 +613,6 @@ extension AddTransactionViewController: UITextViewDelegate {
     func textViewDidEndEditing(textView: UITextView) {
         let text = textView.text
         noteIsEmpty = text == ""
-        selectedCell.cellTextField.text = text
         if noteIsEmpty {
             textView.text = "Type here"
         }

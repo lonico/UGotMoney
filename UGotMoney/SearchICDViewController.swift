@@ -38,7 +38,11 @@ class SearchICDViewController: UIViewController {
                     if error != nil {
                         print("Error: \(error)")
                         
-                        AlertController.Alert(msg: error, title: AlertController.AlertTitle.AuthenticationError).showAlert(self)
+                        let alert = AlertController.Alert(msg: error, title: AlertController.AlertTitle.AuthenticationError) { action in
+                            self.navigationController?.popViewControllerAnimated(true)
+                        }
+                        
+                        alert.dispatchAlert(self)
                     } else {
                         print("DONE with authentication")
                         self.isAuthenticated = true

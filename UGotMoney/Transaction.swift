@@ -41,8 +41,11 @@ class Transaction: NSManagedObject {
         let entity = NSEntityDescription.entityForName("Transaction", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         
-        let person = Person.getPerson(transactionDict[.clientName] as! String)
+        let person = Person.getPerson(transactionDict[.clientName] as! String, activeOnly: true)
         print(">>>person: \(person)")
+        if person == nil {
+            return
+        }
         
         self.person = person
         self.amountPaid = transactionDict[.paymentValue] as! Float

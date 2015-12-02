@@ -17,7 +17,7 @@ class Person: NSManagedObject {
     @NSManaged var firstName: String
     @NSManaged var lastName: String
     @NSManaged var middleName: String
-    @NSManaged var id: Int              // unique id for privacy
+    @NSManaged var id: Int64              // unique id for privacy
     @NSManaged var transactions: [Transaction]
     @NSManaged var active: Bool
     
@@ -54,21 +54,21 @@ class Person: NSManagedObject {
         active = true
     }
     
-    var checksum: Int {
+    var checksum: Int64 {
         return id
     }
     
     // return count+1
-    static func getNextId()->Int {
+    static func getNextId()->Int64 {
         
         do {
-            try fetchedResultsController.performFetch()
+            try fetchedAllResultsController.performFetch()
         } catch let error as NSError {
             print("Fetch error, \(error.localizedDescription)")
             return 0
         }
         
-        if let fetchedObjects = fetchedResultsController.fetchedObjects {
+        if let fetchedObjects = fetchedAllResultsController.fetchedObjects {
             if fetchedObjects.count > 0 {
                 let max_id = fetchedObjects[0].valueForKey("id") as! Int
                 print(">>> \(max_id)")
@@ -94,9 +94,16 @@ class Person: NSManagedObject {
         return [firstName, middleName, lastName].joinWithSeparator(" ")
     }
     
-    static func getClientNames() -> [String] {
+    static func getClientNames(activeOnly activeOnly: Bool) -> [String] {
         
         var clientNames: [String] = []
+        var fetchedResultsController: NSFetchedResultsController
+        if activeOnly {
+            fetchedResultsController = fetchedActiveResultsController
+        } else {
+            fetchedResultsController = fetchedAllResultsController
+        }
+        
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
@@ -112,15 +119,22 @@ class Person: NSManagedObject {
         return clientNames
     }
     
-    static func getClientNamesLowerCase() -> [String] {
+    static func getClientNamesLowerCase(activeOnly activeOnly: Bool) -> [String] {
         
-        let clientNames = getClientNames()
+        let clientNames = getClientNames(activeOnly: activeOnly)
         return clientNames.map({$0.lowercaseString})
     }
     
-    static func getClientNamesDict() -> [String: Person] {
+    static func getClientNamesDict(activeOnly: Bool) -> [String: Person] {
         
         var clientNames: [String: Person] = [:]
+        var fetchedResultsController: NSFetchedResultsController
+        if activeOnly {
+            fetchedResultsController = fetchedActiveResultsController
+        } else {
+            fetchedResultsController = fetchedAllResultsController
+        }
+
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
@@ -136,8 +150,15 @@ class Person: NSManagedObject {
         return clientNames
     }
     
-    static func getPerson(name: String) -> Person! {
+    static func getPerson(name: String, activeOnly: Bool) -> Person! {
         
+        var fetchedResultsController: NSFetchedResultsController
+        if activeOnly {
+            fetchedResultsController = fetchedActiveResultsController
+        } else {
+            fetchedResultsController = fetchedAllResultsController
+        }
+
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
@@ -157,7 +178,18 @@ class Person: NSManagedObject {
     
     // MARK: coredata
 
-    static var fetchedResultsController: NSFetchedResultsController = {
+    static var fetchedAllResultsController: NSFetchedResultsController = {
+        
+        let request = NSFetchRequest(entityName: "Person")
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultsController
+    }()
+    
+    static var fetchedActiveResultsController: NSFetchedResultsController = {
         
         let request = NSFetchRequest(entityName: "Person")
         
@@ -168,4 +200,5 @@ class Person: NSManagedObject {
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultsController
     }()
+
 }

@@ -214,7 +214,7 @@ class AquaClient {
     
     func getArrayFromResult(result: AnyObject) -> [[String:String]]! {
         
-        print(result)
+        //print(result)
         if let array = result as? [[String:String]] {
             return array
         }
@@ -224,7 +224,7 @@ class AquaClient {
     
     func getDictFromResult(result: AnyObject) -> [String:AnyObject]! {
         
-        print(result)
+        //print(result)
         if let dict = result as? [String:AnyObject] {
             return dict
         }

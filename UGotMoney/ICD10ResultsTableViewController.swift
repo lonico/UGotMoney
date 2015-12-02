@@ -35,7 +35,7 @@ class ICD10ResultsTableViewController: UIViewController, UITableViewDataSource, 
                     print("Error: \(error)")
                     AlertController.Alert(msg: error, title: AlertController.AlertTitle.QueryError).dispatchAlert(self)
                 } else {
-                    print(">>> \(details)")
+                    // print(">>> \(details)")
                     if details != nil {
                         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("icd10DetailsVC") as! ICD10DetailsTableViewController
                         vc.details = [details]
