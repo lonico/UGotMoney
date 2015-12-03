@@ -70,11 +70,11 @@ struct PersistentData {
         let defaults = NSUserDefaults.standardUserDefaults()
         if var ICDescs = defaults.dictionaryForKey(Keys.ICDDescriptions) as? [String: String] {
             if ICDescs[""] == nil {
-                ICDescs[""] = "N/A"
+                ICDescs[""] = "<empty>"
             }
             return ICDescs
         }
-        return ["":"N/A"]
+        return ["":"<empty>"]
     }
     
     static func storeICDDescriptions(ICDs: [String: String]) {

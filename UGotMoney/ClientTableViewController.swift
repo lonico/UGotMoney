@@ -72,7 +72,9 @@ extension ClientTableViewController: UITableViewDataSource {
         if person.transactions.count > 0 {
             cell.accessoryType = .DisclosureIndicator
         }
-        if !person.active {
+        if person.active {
+            cell.textLabel?.textColor = UIColor.blueColor()
+        } else {
             cell.textLabel?.textColor = UIColor.lightGrayColor()
         }
         return cell

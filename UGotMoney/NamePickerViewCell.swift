@@ -21,7 +21,6 @@ class NamePickerViewCell: UITableViewCell {
         if selected != nil {
             cell.cellPickerView.selectRow(selected!, inComponent: 0, animated: true)
         }
-        // IOS would not recognize tapping the current selection as a selection
         // Adding a long gesture to close the pickerView
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: controller, action: "longPressActionPickerView:")
         cell.cellPickerView.addGestureRecognizer(longPressGestureRecognizer)

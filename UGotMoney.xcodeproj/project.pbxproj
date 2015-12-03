@@ -21,6 +21,7 @@
 		C08068EC1BEE8925001C5B9A /* NamePickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */; };
 		C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068ED1BEEB153001C5B9A /* TextViewCell.swift */; };
 		C096EF311C0BFACD002624D2 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C096EF301C0BFACD002624D2 /* RoundedButton.swift */; };
+		C096EF331C0FF743002624D2 /* README in Resources */ = {isa = PBXBuildFile; fileRef = C096EF321C0FF743002624D2 /* README */; };
 		C0A189E91BF805FD00F48B39 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189E81BF805FD00F48B39 /* Person.swift */; };
 		C0A189EB1BF80BCB00F48B39 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EA1BF80BCB00F48B39 /* Transaction.swift */; };
 		C0A189ED1BF8182C00F48B39 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EC1BF8182C00F48B39 /* PersistentData.swift */; };
@@ -77,6 +78,7 @@
 		C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePickerViewCell.swift; sourceTree = "<group>"; };
 		C08068ED1BEEB153001C5B9A /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		C096EF301C0BFACD002624D2 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		C096EF321C0FF743002624D2 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		C0A189E81BF805FD00F48B39 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		C0A189EA1BF80BCB00F48B39 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		C0A189EC1BF8182C00F48B39 /* PersistentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		C080686B1BE6EA8D001C5B9A /* UGotMoney */ = {
 			isa = PBXGroup;
 			children = (
+				C096EF321C0FF743002624D2 /* README */,
 				C080687B1BE6EA8E001C5B9A /* Info.plist */,
 				C0A189F81BF9386100F48B39 /* Model */,
 				C0A189FA1BF9388E00F48B39 /* View */,
@@ -323,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C096EF331C0FF743002624D2 /* README in Resources */,
 				C080687A1BE6EA8E001C5B9A /* LaunchScreen.storyboard in Resources */,
 				C08068771BE6EA8E001C5B9A /* Assets.xcassets in Resources */,
 				C08068721BE6EA8D001C5B9A /* Main.storyboard in Resources */,

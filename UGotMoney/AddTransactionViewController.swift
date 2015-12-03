@@ -145,8 +145,7 @@ class AddTransactionViewController: UIViewController {
 
     func longPressActionPickerView(sender: UIPickerView) {
         
-        // Work-around for IOS issue.  Close the pickerView on a long press
-        print("I was HERE")
+        // Close a pickerView on a long press
         if showSecondRow {
             showSecondRow = false
             setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName)
@@ -274,7 +273,6 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         if indexPath.row == 0 {
             if showSecondRow {
                 showSecondRow = false
-                ////view.frame.origin.y = origin_y
                 setValueFromSecondRow(secondRowCellIndex, name: secondRowCellFieldName)
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
                 if selectedIndexPath == indexPath {
@@ -325,7 +323,6 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        print(">>> tapped!")
         let (name, _) = sections[indexPath.section]
         let vc = storyboard?.instantiateViewControllerWithIdentifier("editAmountsVC") as! EditPickerValuesViewController
         vc.pickerLabel = name
@@ -400,7 +397,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func setValueFromSecondRow(indexPath: NSIndexPath, name: Transaction.FieldName) -> Bool {
+    func setValueFromSecondRow(indexPath: NSIndexPath, name: Transaction.FieldName) {
         
         switch (name) {
         case .clientName:
@@ -419,11 +416,13 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
             let cell  = tableView.cellForRowAtIndexPath(indexPath) as! DatePickerViewCell
             transactionDict[name] = cell.cellPickerView.date
         default:
-            return false
+            return
         }
         enableSaveButton()
-        return true
+        return
     }
+    
+    // MARK: keyboard notifications
     
     func keyboardWillShow(sender: NSNotification) {
         let endFrame = (sender.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue()
@@ -435,6 +434,8 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
     func keyboardWillHide(sender: NSNotification) {
         view.frame.origin.y = origin_y
     }
+    
+    // MARK: transaction support functions
     
     func resetValues() {
         

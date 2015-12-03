@@ -23,7 +23,6 @@ class HttpClient: NSObject {
         
         // build url with parameters
         let urlWithParams = urlString + HttpClient.escapedParameters(parameters)
-        print(urlWithParams)
         
         // build request
         let request = NSMutableURLRequest(URL: NSURL(string: urlWithParams)!)
@@ -87,7 +86,6 @@ class HttpClient: NSObject {
                 request.addValue(value, forHTTPHeaderField: key)
             }
         }
-        print(request)
         
         // send request
         let task = session.dataTaskWithRequest(request) { data, response, error in

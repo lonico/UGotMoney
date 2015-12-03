@@ -88,7 +88,7 @@ class AquaClient {
             completion_handler(nil, "ERROR: not authenticated")
             return
         }
-        print("access_token: \(access_token)")
+        print(">>> access_token: \(access_token)")
         
         var params = [ParamsRequestKeys.access_token: access_token]
         if query != nil {

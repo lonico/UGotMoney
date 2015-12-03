@@ -268,7 +268,12 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
     // MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    
+        if pickerLabel == .icd10 {
+            let (value, _) = getValue(indexPath.row)
+            if value == "" {
+                return false
+            }
+        }
         return true
     }
     
