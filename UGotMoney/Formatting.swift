@@ -11,6 +11,7 @@ import Foundation
 struct Formatting {
     
     static let dateFormat = NSDateFormatter.dateFormatFromTemplate("EEE, MMM d, yyyy", options: 0, locale: NSLocale.currentLocale())
+    static let dateFormatCSV = NSDateFormatter.dateFormatFromTemplate("yyyy/MM/dd", options: 0, locale: NSLocale.currentLocale())
     static let dateFormatter = NSDateFormatter()
     
     static func formattedDate(date: NSDate!) -> String! {
@@ -21,6 +22,16 @@ struct Formatting {
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.stringFromDate(date)
     }
+    
+    static func formattedDateCSV(date: NSDate!) -> String! {
+        
+        if date == nil {
+            return nil
+        }
+        dateFormatter.dateFormat = dateFormatCSV
+        return dateFormatter.stringFromDate(date)
+    }
+
     
     static let currencyFormatter = NSNumberFormatter()
     

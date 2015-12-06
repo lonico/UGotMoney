@@ -57,7 +57,7 @@ class AddNewClientViewController: UIViewController {
             return
         }
         if Person.getClientNamesLowerCase(activeOnly: false).contains(name.lowercaseString) {
-            let alert = AlertController.Alert(msg: "An inactive person with the same name already exists - do you want to reactivate this client?", title: AlertController.AlertTitle.DuplicateEntry, style: .ActionSheet) { action in
+            let alert = AlertController.Alert(msg: "An inactive person with the same name already exists - do you want to reactivate this client?", title: AlertController.AlertTitle.DuplicateEntry, style: .ActionSheet, actionTitle: AlertController.AlertActionTitle.Enable) { action in
     
                 if action.title == AlertController.AlertActionTitle.Enable {
                     let person = Person.getPerson(name, activeOnly: false)

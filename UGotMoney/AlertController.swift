@@ -15,19 +15,22 @@ struct AlertController {
         let title: String?
         let style: UIAlertControllerStyle
         let handler: ((UIAlertAction) -> Void)?
+        let actionTitle: String?
         
         init(msg: String?, title: String?, handler: ((UIAlertAction) -> Void)? = nil) {
             self.msg = msg
             self.title = title
             self.style = .Alert
             self.handler = handler
+            self.actionTitle = nil
         }
 
-        init(msg: String?, title: String?, style: UIAlertControllerStyle, handler: ((UIAlertAction) -> Void)? = nil) {
+        init(msg: String?, title: String?, style: UIAlertControllerStyle, actionTitle: String, handler: ((UIAlertAction) -> Void)? = nil) {
             self.msg = msg
             self.title = title
             self.style = style
             self.handler = handler
+            self.actionTitle = actionTitle
         }
         
         func showAlert(vc: UIViewController) -> Void {
@@ -48,11 +51,11 @@ struct AlertController {
             }
             if (style == .ActionSheet) {
                 if handler == nil {
-                    confirmAction = UIAlertAction(title: AlertActionTitle.Enable, style: UIAlertActionStyle.Default) { action in
+                    confirmAction = UIAlertAction(title: actionTitle, style: UIAlertActionStyle.Default) { action in
                         self.handler!(action)
                     }
                 }else {
-                    confirmAction = UIAlertAction(title: AlertActionTitle.Enable, style: UIAlertActionStyle.Default) { action in
+                    confirmAction = UIAlertAction(title: actionTitle, style: UIAlertActionStyle.Default) { action in
                         self.handler!(action)
                     }
                 }
@@ -99,5 +102,6 @@ struct AlertController {
         
         static let Dismiss = "Dismiss"
         static let Enable = "Enable"
+        static let Export = "Export"
     }
 }

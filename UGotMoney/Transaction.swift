@@ -56,6 +56,19 @@ class Transaction: NSManagedObject {
         self.serviceDate = transactionDict[.serviceDate] as? NSDate ?? self.paymentDate
     }
     
+    var csv: String {
+        
+        return [
+                "\(person.id)",
+                "\"\(Formatting.formattedDateCSV(serviceDate))\"",
+                "\(amountPaid)",
+                "\"\(paymentType)\"",
+                "\"\(icd10)\"",
+                "\"\(Formatting.formattedDateCSV(paymentDate))\"",
+                "\"\(notes)\""
+                ].joinWithSeparator(",")
+    }
+    
     
     
 }

@@ -13,6 +13,7 @@ class ClientTableViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     var clients: [Person]!
+    var idIsEnabled = false
     
     override func viewWillAppear(animated: Bool) {
         print(">>> \(__FUNCTION__)")
@@ -34,6 +35,11 @@ class ClientTableViewController: UIViewController {
             return fetchedObjects
         }
         return nil
+    }
+    
+    @IBAction func idButtonTouchUp(sender: UIBarButtonItem) {
+        idIsEnabled = !idIsEnabled
+        tableView.reloadData()
     }
     
     @IBAction func addButtonTouchUp(sender: UIBarButtonItem) {
@@ -69,6 +75,11 @@ extension ClientTableViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("clientCell")!
         let person = clients[indexPath.row]
         cell.textLabel?.text = person.name
+        if idIsEnabled {
+            cell.detailTextLabel?.text = "    (id: \(person.id))"
+        } else {
+            cell.detailTextLabel?.text = ""
+        }
         if person.transactions.count > 0 {
             cell.accessoryType = .DisclosureIndicator
         }

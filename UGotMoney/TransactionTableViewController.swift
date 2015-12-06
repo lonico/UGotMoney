@@ -45,7 +45,44 @@ class TransactionTableViewController: UIViewController, UITableViewDataSource, U
         vc.transaction = transaction
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
+    // MARK: actions
+    
+    @IBAction func actionButtonTouchUp(sender: UIBarButtonItem) {
+        
+        let alert = AlertController.Alert(msg: "Do you want to export these transactions", title: AlertController.AlertTitle.Generic, style: .ActionSheet, actionTitle: AlertController.AlertActionTitle.Export) { action in
+            
+            if action.title == AlertController.AlertActionTitle.Export {
+                self.exportTransactions()
+            }
+        }
+        alert.showAlert(self)
+    }
+    
+    func exportTransactions() {
+    
+        var filename = "transactions"
+        
+        if person != nil {
+            
+            filename += "_\(person.id)"
+        }
+        filename += ".csv"
+        
+        if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+            let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(filename)
+            print("writing to \(path)")
+            if FileAndiCloudServices.writeToFile(path, transactions: transactions, vc: self) {
+                print("copying to iCLoud")
+                FileAndiCloudServices.saveFileToiCloud(path, filename: filename, vc: self)
+            }
+        } else {
+            AlertController.Alert(msg: "Failed to create local file", title: AlertController.AlertTitle.InternalError).showAlert(self)
+        }
+    }
+    
+    
+        
     // MARK: coredata
 
     func getTransactions() -> [Transaction] {

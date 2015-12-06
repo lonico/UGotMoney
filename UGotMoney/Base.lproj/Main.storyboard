@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -180,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLS-vD-c4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="461" y="139"/>
+            <point key="canvasLocation" x="46" y="195"/>
         </scene>
         <!--Edit choices-->
         <scene sceneID="mXz-v6-qpM">
@@ -270,7 +271,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaH-UE-x31" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1087" y="139"/>
+            <point key="canvasLocation" x="757" y="195"/>
         </scene>
         <!--Add value-->
         <scene sceneID="f99-yA-dNB">
@@ -330,7 +331,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="21i-SL-JHA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1708" y="139"/>
+            <point key="canvasLocation" x="1502" y="195"/>
         </scene>
         <!--Add New Client-->
         <scene sceneID="T8a-uw-bhz">
@@ -494,7 +495,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3h2-4b-oIM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2337" y="139"/>
+            <point key="canvasLocation" x="2226" y="195"/>
         </scene>
         <!--Transactions-->
         <scene sceneID="8D2-Pm-Jga">
@@ -558,12 +559,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Transactions" id="5w4-5x-jFb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="t1m-Lm-TmP"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="t1m-Lm-TmP">
+                            <connections>
+                                <action selector="actionButtonTouchUp:" destination="Il3-C7-zfg" id="BW6-yF-vsJ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ly3-Et-svx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2969" y="139"/>
+            <point key="canvasLocation" x="2954" y="195"/>
         </scene>
         <!--SearchICD View Controller-->
         <scene sceneID="sDm-xC-3Ps">
@@ -774,7 +779,7 @@ If % is not used, the name search defaults to F% and the description search defa
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEQ-8e-RFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3609" y="139"/>
+            <point key="canvasLocation" x="3612" y="195"/>
         </scene>
         <!--Results Table View Controller-->
         <scene sceneID="HuQ-Eh-S8S">
@@ -840,7 +845,7 @@ If % is not used, the name search defaults to F% and the description search defa
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CvD-fF-ahQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4250" y="139"/>
+            <point key="canvasLocation" x="4246" y="195"/>
         </scene>
         <!--ICD10 details-->
         <scene sceneID="T5R-iV-gdd">
@@ -969,7 +974,7 @@ If % is not used, the name search defaults to F% and the description search defa
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Bx-s2-Fgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4890" y="139"/>
+            <point key="canvasLocation" x="4890" y="195"/>
         </scene>
         <!--Clients-->
         <scene sceneID="0eD-3i-1im">
@@ -988,7 +993,7 @@ If % is not used, the name search defaults to F% and the description search defa
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clientCell" textLabel="eNL-Ex-0W0" style="IBUITableViewCellStyleDefault" id="WTg-ZS-uqo">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clientCell" textLabel="eNL-Ex-0W0" detailTextLabel="vb0-Oh-aq7" style="IBUITableViewCellStyleValue1" id="WTg-ZS-uqo">
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WTg-ZS-uqo" id="ZDj-3I-LbH">
@@ -996,11 +1001,19 @@ If % is not used, the name search defaults to F% and the description search defa
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eNL-Ex-0W0">
-                                                    <rect key="frame" x="15" y="0.0" width="530" height="43"/>
+                                                    <rect key="frame" x="15" y="12" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vb0-Oh-aq7">
+                                                    <rect key="frame" x="489" y="12" width="56" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1025,11 +1038,18 @@ If % is not used, the name search defaults to F% and the description search defa
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Clients" id="dVR-Fw-8dT">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NCk-xY-KLj">
-                            <connections>
-                                <action selector="addButtonTouchUp:" destination="STJ-mX-qU7" id="f5e-d0-6QS"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="NCk-xY-KLj">
+                                <connections>
+                                    <action selector="addButtonTouchUp:" destination="STJ-mX-qU7" id="f5e-d0-6QS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Id" id="w7w-aV-WgV">
+                                <connections>
+                                    <action selector="idButtonTouchUp:" destination="STJ-mX-qU7" id="Liw-HY-fZW"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="VwM-Nn-8sG" id="wMI-ae-fLX"/>
@@ -1037,7 +1057,7 @@ If % is not used, the name search defaults to F% and the description search defa
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SbJ-NZ-3wY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5529" y="139"/>
+            <point key="canvasLocation" x="5529" y="195"/>
         </scene>
         <!--Transaction Details-->
         <scene sceneID="kar-qa-Lqw">
@@ -1122,7 +1142,7 @@ If % is not used, the name search defaults to F% and the description search defa
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ASP-R0-mx0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6171" y="139"/>
+            <point key="canvasLocation" x="6170" y="195"/>
         </scene>
     </scenes>
 </document>
