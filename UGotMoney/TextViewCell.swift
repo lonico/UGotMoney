@@ -24,7 +24,12 @@ class TextViewCell: UITableViewCell {
                 textView.frame = CGRectMake(textView.frame.minX, textView.frame.minY, tableView.frame.width - 20, textView.frame.height)
             }
             cell.cellTextView = textView
-            cell.contentView.addSubview(textView)
+        } else {
+            cell.cellTextView.removeFromSuperview()
+        }
+        cell.contentView.addSubview(textView)
+        if cell.cellTextView != textView {
+            print(">>> Inconsistency in \(__FUNCTION__)")
         }
         return cell
     }

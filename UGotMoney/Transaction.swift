@@ -42,7 +42,7 @@ class Transaction: NSManagedObject {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         
         let person = Person.getPerson(transactionDict[.clientName] as! String, activeOnly: true)
-        print(">>>person: \(person)")
+        // print(">>>person: \(person)")
         if person == nil {
             return
         }
