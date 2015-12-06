@@ -42,7 +42,7 @@ class EditPickerValuesViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         case .paymentValue, .paymentType:
             let vc = storyboard?.instantiateViewControllerWithIdentifier("inputTextFieldVC") as! InputTextFieldViewController
-            vc.labelText = "Add value for \(AddTransactionViewController.getFieldLabel(pickerLabel!))"
+            vc.labelText = "Add value for \(Transaction.getFieldLabel(pickerLabel!))"
             vc.keyBoardType = getInputType()
             vc.delegate = self
             navigationController?.pushViewController(vc, animated: true)
@@ -262,7 +262,7 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return "  Editing values for \(AddTransactionViewController.getFieldLabel(pickerLabel))"
+        return "  Editing values for \(Transaction.getFieldLabel(pickerLabel))"
     }
     
     // MARK: UITableViewDelegate
@@ -282,6 +282,13 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
         return .Delete
     }
     
+    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+        
+        if pickerLabel! == .clientName {
+            return "Archive"
+        }
+        return "Delete"
+    }
 }
 
 extension EditPickerValuesViewController: InputTextFieldViewControllerDelegate {

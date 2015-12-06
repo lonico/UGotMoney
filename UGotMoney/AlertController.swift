@@ -42,10 +42,14 @@ struct AlertController {
             let alertController = UIAlertController(title: valid_title, message: msg, preferredStyle: style)
             var cancelAction: UIAlertAction
             var confirmAction: UIAlertAction
+            var cancelActionTitle = AlertActionTitle.Dismiss
+            if (style == .ActionSheet) {
+                cancelActionTitle = AlertActionTitle.Cancel
+            }
             if handler == nil {
-                cancelAction = UIAlertAction(title: AlertActionTitle.Dismiss, style: UIAlertActionStyle.Cancel, handler: nil)
+                cancelAction = UIAlertAction(title: cancelActionTitle, style: UIAlertActionStyle.Cancel, handler: nil)
             } else {
-                cancelAction = UIAlertAction(title: AlertActionTitle.Dismiss, style: UIAlertActionStyle.Cancel) { action in
+                cancelAction = UIAlertAction(title: cancelActionTitle, style: UIAlertActionStyle.Cancel) { action in
                     self.handler!(action)
                 }
             }
@@ -83,23 +87,24 @@ struct AlertController {
         
         static let Generic = "Alert"
         static let InternalError = "Internal error"
+        static let Error = "Error"
+        static let Details = "Details"
+        static let Success = "Success"
+        
+        static let ConnectionError = "ConnectioError"
         
         static let AuthenticationError = "Failed to connect or authenticate with server"
         static let QueryError = "Failed to query data from server"
         static let EmptyName = "Empty name"
-        static let EmptyList = "Empty list"
-        static let DuplicateEntry = "Duplicate Name"
-        static let RefreshError = "Refresh error"
-        static let OpenURLError = "Failed to open URL"
-        static let MissingURLError = "Empty URL string"
-        static let MissingLocationError = "Empty location"
-        static let Details = "Details"
-        static let Success = "Success"
         
+        static let DuplicateEntry = "Duplicate Name"
+        static let EmptyList = "Empty list"
+
     }
     
     struct AlertActionTitle {
         
+        static let Cancel = "Cancel"
         static let Dismiss = "Dismiss"
         static let Enable = "Enable"
         static let Export = "Export"

@@ -58,4 +58,37 @@ class UGotMoneyTests: XCTestCase {
         XCTAssertEqual(fvalue, 1456.45)
     }
     
+    
+    
+    func testPerson() {
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+        let person = Person(firstName: "First", middleName: "Middle", lastName: "Last", id: nil, context: context)
+        XCTAssertNotNil(person, "Failed to create Person object")
+        XCTAssertEqual(person?.name, "First Middle Last")
+    }
+    
+    func testTransaction() {
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+        let person = Person(firstName: "First", middleName: "Middle", lastName: "Last", id: nil, context: context)
+        XCTAssertNotNil(person, "Failed to create Person object")
+        if person == nil {
+            return
+        }
+        XCTAssertEqual(person!.name, "First Middle Last")
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .ShortStyle
+        let date = formatter.dateFromString("11/10/15")
+        let expectedCSVDate = "11/10/2015"
+        let transactionDict: [Transaction.FieldName: AnyObject!] = [
+            Transaction.FieldName.clientName: person!.name,
+            Transaction.FieldName.paymentDate: date,
+            Transaction.FieldName.paymentValue: 130.0,
+            Transaction.FieldName.paymentType: "cash",
+            Transaction.FieldName.icd10: "",
+            Transaction.FieldName.notes: ""
+            ]
+        let transaction = Transaction(transactionDict: transactionDict, context: context)
+        XCTAssertEqual(transaction.csv, "\(person!.id),\(expectedCSVDate),130.0,\"cash\",\"\",\(expectedCSVDate),\"\"\n")
+    }
 }

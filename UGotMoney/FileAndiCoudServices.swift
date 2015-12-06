@@ -30,9 +30,9 @@ struct FileAndiCloudServices {
             return false
         }
         
+        fileHandle.writeData(Transaction.csvTitle.dataUsingEncoding(NSUTF8StringEncoding)!)
         for transaction in transactions {
-            let text = transaction.csv + "\n"
-            fileHandle.writeData(text.dataUsingEncoding(NSUTF8StringEncoding)!)
+            fileHandle.writeData(transaction.csv.dataUsingEncoding(NSUTF8StringEncoding)!)
             
         }
         fileHandle.closeFile()
@@ -44,7 +44,7 @@ struct FileAndiCloudServices {
         let fileManager = NSFileManager.defaultManager()
         let iCloudURL = fileManager.URLForUbiquityContainerIdentifier(nil)
         if iCloudURL == nil {
-            AlertController.Alert(msg: "iCloud is not available - check that you have enabled iCloud on this device", title: AlertController.AlertTitle.OpenURLError).showAlert(vc)
+            AlertController.Alert(msg: "iCloud is not available - check that you have enabled iCloud on this device", title: AlertController.AlertTitle.ConnectionError).showAlert(vc)
             return
         }
         let iCloudDocURL = iCloudURL!.URLByAppendingPathComponent("Documents")
@@ -95,9 +95,9 @@ struct FileAndiCloudServices {
                     }
                 }
                 if success {
-                    AlertController.Alert(msg: "Transactions exported to iCloud drive)", title: AlertController.AlertTitle.Success).dispatchAlert(vc)
+                    AlertController.Alert(msg: "Transactions exported to iCloud drive", title: AlertController.AlertTitle.Success).dispatchAlert(vc)
                 } else {
-                    AlertController.Alert(msg: "Transactions could not be exported)", title: AlertController.AlertTitle.Generic).dispatchAlert(vc)
+                    AlertController.Alert(msg: "Transactions could not be exported)", title: AlertController.AlertTitle.Error).dispatchAlert(vc)
                 }
             } catch let error as NSError {
                 print("error getting key value for: \(iCloudPath)")

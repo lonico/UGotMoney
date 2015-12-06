@@ -13,8 +13,7 @@ class NamePickerViewCell: UITableViewCell {
     var cellPickerView: UIPickerView!
     
     static func getCellForNamePickerView(tableView: UITableView, pickerView: UIPickerView, controller: AddTransactionViewController, selected: Int?) -> UITableViewCell {
-        var identifier: String
-        identifier = "namePickerViewCell"
+        let identifier = "namePickerViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! NamePickerViewCell
         cell.cellPickerView = pickerView
         cell.cellPickerView.showsSelectionIndicator = true

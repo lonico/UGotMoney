@@ -20,7 +20,6 @@ class TextViewCell: UITableViewCell {
         if cell.cellTextView == nil {
             textView.frame = cell.contentView.frame.insetBy(dx: 10, dy: 0)
             textView.textContainer.lineBreakMode = .ByWordWrapping
-            cell.contentView.addSubview(textView)
             if textView.frame.width > tableView.frame.width {
                 textView.frame = CGRectMake(textView.frame.minX, textView.frame.minY, tableView.frame.width - 20, textView.frame.height)
             }

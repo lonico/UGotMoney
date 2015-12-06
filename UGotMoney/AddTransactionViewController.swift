@@ -236,7 +236,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         
         var cell = UITableViewCell()
         if row == 0 {
-            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: AddTransactionViewController.getFieldLabel(name), type: type)
+            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: Transaction.getFieldLabel(name), type: type)
             let acell = cell as! LabelAndTextFieldCell
             acell.cellTextField.text = getValue(name)
             if showSecondRow {
@@ -269,7 +269,6 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print(">>> didSelect \(indexPath.section)")
-        tableView.endEditing(true)
         if indexPath.row == 0 {
             if showSecondRow {
                 showSecondRow = false
@@ -282,7 +281,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
             }
             let (name, type) = sections[indexPath.section]
             if getCount(name) == 0 {
-                AlertController.Alert(msg: "please add value for \(AddTransactionViewController.getFieldLabel(name)) using the edit button (bottom left)", title: AlertController.AlertTitle.EmptyList).showAlert(self)
+                AlertController.Alert(msg: "please add value for \(Transaction.getFieldLabel(name)) using the edit button (bottom left)", title: AlertController.AlertTitle.EmptyList).showAlert(self)
                 return
             }
             selectedIndexPath = indexPath
@@ -293,6 +292,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
                 secondRowCellFieldName = name
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath, secondRowCellIndex], withRowAnimation: UITableViewRowAnimation.Fade)
             default:
+                secondRowCellIndex = nil
                 secondRowCellFieldName = nil
                 printInternalError("\(__FUNCTION__)")
             }
@@ -329,14 +329,6 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if secondRowCellIndex != nil && indexPath == secondRowCellIndex && secondRowCellFieldName == Transaction.FieldName.notes {
-            noteTextView.editable = true
-            noteTextView.becomeFirstResponder()
-        }
-
-    }
-
     // MARK: utilify functions
     
     func getCellForSecondRow(tableView: UITableView, name: Transaction.FieldName, type: FieldType) -> UITableViewCell {
@@ -345,6 +337,13 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         switch(type) {
         case.textView:
             cell = TextViewCell.getCellForTextView(tableView, textView: noteTextView)
+            if showSecondRow {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.noteTextView.becomeFirstResponder()
+                }
+            } else {
+                noteTextView.resignFirstResponder()
+            }
         case .datePicker:
             var  initialDate: NSDate
             switch name {
@@ -445,10 +444,9 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         transactionDict[.icd10] = ""
         transactionDict[.paymentDate] = nil
         transactionDict[.serviceDate] = nil
-        //paymentDate = nil
         transactionDict[.notes] = ""
         noteIsEmpty = true
-        noteTextView.text = ""
+        noteTextView.text = "Type here"
         enableSaveButton()
     }
     
@@ -496,29 +494,6 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
         return value
     }
     
-    // return number of elements for pickerChoices
-    // DatePickers arbitrirarly set to 1
-    static func getFieldLabel(name: Transaction.FieldName) -> String {
-        
-        var value: String
-        switch name {
-        case .clientName:
-            value = "Client name"
-        case .paymentValue:
-            value = "Amount paid"
-        case .paymentType:
-            value = "Payment type"
-        case .paymentDate:
-            value = "Payment date"
-        case .serviceDate:
-            value = "Service date"
-        case .icd10:
-            value = "ICD-10"
-        case .notes:
-            value = "Notes"
-        }
-        return value
-    }
 }
 
 extension AddTransactionViewController: UIPickerViewDataSource,  UIPickerViewDelegate {
@@ -606,12 +581,14 @@ extension AddTransactionViewController: UIPickerViewDataSource,  UIPickerViewDel
 extension AddTransactionViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(textView: UITextView) {
+        
         if noteIsEmpty {
             textView.text = ""
         }
     }
     
     func textViewDidEndEditing(textView: UITextView) {
+        
         let text = textView.text
         noteIsEmpty = text == ""
         if noteIsEmpty {

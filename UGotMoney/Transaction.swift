@@ -56,17 +56,54 @@ class Transaction: NSManagedObject {
         self.serviceDate = transactionDict[.serviceDate] as? NSDate ?? self.paymentDate
     }
     
+    // return number of elements for pickerChoices
+    // DatePickers arbitrirarly set to 1
+    static func getFieldLabel(name: Transaction.FieldName) -> String {
+        
+        var value: String
+        switch name {
+        case .clientName:
+            value = "Client name"
+        case .paymentValue:
+            value = "Amount paid"
+        case .paymentType:
+            value = "Payment type"
+        case .paymentDate:
+            value = "Payment date"
+        case .serviceDate:
+            value = "Service date"
+        case .icd10:
+            value = "ICD-10"
+        case .notes:
+            value = "Notes"
+        }
+        return value
+    }
+    
+    static var csvTitle: String {
+        
+        return [
+                "Id",
+                getFieldLabel(.paymentDate),
+                getFieldLabel(.paymentValue),
+                getFieldLabel(.paymentType),
+                getFieldLabel(.icd10),
+                getFieldLabel(.serviceDate),
+                getFieldLabel(.notes)
+                ].joinWithSeparator(",") + "\n"
+    }
+    
     var csv: String {
         
         return [
                 "\(person.id)",
-                "\"\(Formatting.formattedDateCSV(serviceDate))\"",
+                "\(Formatting.formattedDateCSV(paymentDate))",
                 "\(amountPaid)",
                 "\"\(paymentType)\"",
                 "\"\(icd10)\"",
-                "\"\(Formatting.formattedDateCSV(paymentDate))\"",
+                "\(Formatting.formattedDateCSV(serviceDate))",
                 "\"\(notes)\""
-                ].joinWithSeparator(",")
+                ].joinWithSeparator(",")  + "\n"
     }
     
     

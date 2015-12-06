@@ -57,7 +57,7 @@ extension TransactionDetailsViewController: UITableViewDataSource, UITableViewDe
         var cell = UITableViewCell()
         switch type {
         case .textField:
-            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: AddTransactionViewController.getFieldLabel(name), type: type)
+            cell = LabelAndTextFieldCell.getCellForLabelAndText(tableView, name: Transaction.getFieldLabel(name), type: type)
             let acell = cell as! LabelAndTextFieldCell
             acell.cellTextField.text = getValue(name)
         case .textView:
