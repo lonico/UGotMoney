@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Customized cell showing a Label and TextField
 class LabelAndTextFieldCell: UITableViewCell {
 
     @IBOutlet var cellLabel: UILabel!

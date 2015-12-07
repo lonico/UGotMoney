@@ -13,6 +13,8 @@ protocol ICD10DetailsTableViewControllerDelegate {
     func didSelectICD(value: String!, description: String!)
 }
 
+// Recursively show the details for a ICD-10 code.
+// Some fields are tables or dictionaries, and are recursively shown.
 class ICD10DetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var details: [[String: AnyObject]]!

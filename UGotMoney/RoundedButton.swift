@@ -8,6 +8,7 @@
 
 import UIKit
 
+//Custom button with rounded corners and custom colors
 class RoundedButton: UIButton {
 
     var radius: CGFloat = 0.3

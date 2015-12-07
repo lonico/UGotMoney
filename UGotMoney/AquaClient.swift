@@ -15,6 +15,7 @@ private let OAUTH_URL = "https://api.aqua.io/oauth/token"
 private let QUERY_URL = "https://api.aqua.io/codes/beta/icd10.json"
 private let CODE_URL = "https://api.aqua.io/codes/beta/icd10/"
 
+// Interface to aqua.io services to look up or search ICD-10 codes
 class AquaClient {
     
     var access_token: String! = nil
@@ -143,7 +144,7 @@ class AquaClient {
             completion_handler(nil, "ERROR: not authenticated")
             return
         }
-        print("access_token: \(access_token)")
+        print(">>> access_token: \(access_token)")
         
         let params = [ParamsRequestKeys.access_token: access_token]
         

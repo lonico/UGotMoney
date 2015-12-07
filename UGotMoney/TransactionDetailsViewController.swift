@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Show the fields associated to a transaction.
 class TransactionDetailsViewController: UIViewController {
     
     var transaction: Transaction!

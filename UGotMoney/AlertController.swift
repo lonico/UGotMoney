@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Wrapper around UIAlertController
 struct AlertController {
     
     struct Alert {

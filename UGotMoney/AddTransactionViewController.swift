@@ -8,6 +8,15 @@
 
 import UIKit
 
+// The main view controller
+// A new transaction can quicly be entered using DataPickers
+// and PickerViews
+
+// The UI is a table.  Each section contains 1 or 2 rows:
+//   the first row is a label and a value
+//   the second row is hidden by default.  It provides a widget
+//    to enter data (pickerView, textView, ...)
+
 class AddTransactionViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
@@ -15,7 +24,6 @@ class AddTransactionViewController: UIViewController {
     
     @IBOutlet var toolBar: UIToolbar!
     @IBOutlet var saveButton: UIBarButtonItem!
-    
     
     enum FieldType {
         case datePicker
@@ -41,11 +49,6 @@ class AddTransactionViewController: UIViewController {
     var paymentTypePickerView: UIPickerView!
     var ICDPickerView: UIPickerView!
     var noteTextView: UITextView!
-    
-    // The UI is a table.  Each section contains 1 or 2 rows:
-    //   the first row is a label and a value
-    //   the second row is hidden by default.  It provides a widget
-    //    to enter data (pickerView, textView), ...
     
     // if showSecondRow is false, the other variables are undefined
     // if true, they are used to manage the section

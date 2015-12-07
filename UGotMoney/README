@@ -22,12 +22,12 @@ Once data is entered, it can be visualized in two ways:
 1) a list of all transactions (organize icon) sorted by payment date.  A summary for each transaction is presented in a table.  If a transaction is selected, a detail view is presented.
 2) a list of clients (bookmark icon) sorted by most recently added client.  Selecting a client will show a table with a list of transactions for this client, sorted by payment date.  A summary for each transaction is presented in a table.  If a transaction is selected, a detail view is presented.
 
-The transaction data can be exported to iCloud drive.  This can be used to import the data in Numbers, or attach it to an email in iCloud drive.  For privacy, the client names are not exported, only a numeric id that is also visible in the client list (bookmark icon in main screen).  The transactions can be exported either as a whole (from the transaction list), or for one client (from the transactions list for this client).
+The transaction data can be exported to iCloud Drive.  This can be used to import the data in Numbers, or attach it to an email in iCloud Drive.  For privacy, the client names are not exported, only a numeric id that is also visible in the client list (bookmark icon in main screen).  The transactions can be exported either as a whole (from the transaction list), or for one client (from the transactions list for this client).
 
 Housekeeping: the values for fees and payment types can be reordered (eg moving the most used ones to the top). And they can be deleted.  This will not impact already recorded transactions.
 Clients can be deleted, but this will not actually delete the client record: the record is marked as inactive, and the client name will not appear as a choice when creating a new transaction.  The records for this client will still show in the transaction list.  The client still shows in the client list (bookmark) but is greyed out.  This enables access to this client's existing transactions.  If a client is added with the same name, the existing record is reused and marked as active (a client coming back a period of inactivity).
 
-When exporting to iCloud drive, .csv files are created under the UGotMoney folder.  Either as transaction.csv for all transactions or transactions_<id>.csv for a client transaction.  The id value can be seen in the client view.
+When exporting to iCloud Drive, .csv files are created under the UGotMoney folder.  Either as transaction.csv for all transactions or transactions_<id>.csv for a client transaction.  The id value can be seen in the client view.
 
 Key features:
 1) quickly enter transactions with no typing (except for notes)

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Customized cell for a TextField.
 class TextViewCell: UITableViewCell {
     
     var cellTextView: UITextView!

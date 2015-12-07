@@ -12,6 +12,7 @@ protocol AddNewClientViewControllerDelegate {
     func didFinishAddingClient(value: Person!)
 }
 
+// Controller to enter client data
 class AddNewClientViewController: UIViewController {
     
     @IBOutlet var firstNameLabel: UILabel!

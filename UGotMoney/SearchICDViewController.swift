@@ -8,6 +8,9 @@
 
 import UIKit
 
+// Controller to look-up a know ICD-10 code, or to perform a partial search.
+// For a succesful look-up, the detail view will be shown.
+// For a succesful search, a list of ICD-10 will be shown.
 class SearchICDViewController: UIViewController {
     
     var isAuthenticated = false
@@ -57,7 +60,6 @@ class SearchICDViewController: UIViewController {
     }
 
     // MARK: action buttons
-    
     
     @IBAction func lookUpButtonTouchUp(sender: UIButton) {
         

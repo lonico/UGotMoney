@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Interface to HTTP requests.
 class HttpClient: NSObject {
     
     var session: NSURLSession

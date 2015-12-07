@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Customized cell for PickerView 
 class NamePickerViewCell: UITableViewCell {
     
     var cellPickerView: UIPickerView!

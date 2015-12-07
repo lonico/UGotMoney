@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+// Show a list of clients in a table.
+// Selecting a client shows a list of transactions for this client.
 class ClientTableViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!

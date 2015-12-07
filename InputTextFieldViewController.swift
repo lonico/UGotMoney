@@ -12,8 +12,8 @@ protocol InputTextFieldViewControllerDelegate {
     func didFinishEditingInputTextField(value: String!)
 }
 
+// Controller to input free text format using a TextField
 class InputTextFieldViewController: UIViewController, UITextFieldDelegate {
-    
     
     @IBOutlet var label: UILabel!
     @IBOutlet var textField: UITextField!
@@ -31,19 +31,17 @@ class InputTextFieldViewController: UIViewController, UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
     
-    
     @IBAction func addButtonTouchUp(sender: UIBarButtonItem) {
         
         value = textField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        print(">>> value: \(value)")
+        print(">>> value: >>\(value)<<")
         delegate.didFinishEditingInputTextField(value)
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
         value = textField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        print("done with editing: \(value)")
+        print(">>> done with editing: >>\(value)<<")
         return true
     }
-
 }

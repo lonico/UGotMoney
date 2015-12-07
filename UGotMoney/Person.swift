@@ -12,6 +12,7 @@ import UIKit
 
 @objc(Person)
 
+// A Person class, to represent a client using CoreData
 class Person: NSManagedObject {
     
     @NSManaged var firstName: String

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Show the seeach results for ICD-10 in a table view.
 class ICD10ResultsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var results: [[String: String]]!

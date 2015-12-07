@@ -9,6 +9,13 @@
 //import Foundation
 import UIKit
 
+// Generic class to add/move/delete entries to the arrays
+// used to populate pickerView values.
+// The values are presented in a table, and rows can be 
+// moved or deleted.  (Clients cannot be deleted, they are
+// marked as not active.)
+// A + button enables adding new entries.
+
 class EditPickerValuesViewController: UIViewController {
     
     var pickerLabel: Transaction.FieldName!

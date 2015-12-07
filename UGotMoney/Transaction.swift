@@ -11,6 +11,7 @@ import CoreData
 
 @objc(Transaction)
 
+// Hold transactions for a client using CoreData
 class Transaction: NSManagedObject {
     
     @NSManaged var paymentDate: NSDate

@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+// Show a list of transactions in a table, for all clients or one client.
+// Selecting a transaction shows the details for this transaction.
 class TransactionTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var transactions: [Transaction]!

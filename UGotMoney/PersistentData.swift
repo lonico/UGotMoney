@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Fields with a limited set of values are kept using NSUserDefaults.
+// These support functions are used to store and retrieve data
 struct PersistentData {
     
     struct Keys {

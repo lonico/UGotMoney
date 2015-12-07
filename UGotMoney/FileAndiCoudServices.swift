@@ -8,6 +8,8 @@
 
 import UIKit
 
+// support functions to write data to a local file or
+// to export a file to iCloud Drive.
 struct FileAndiCloudServices {
     
     static func writeToFile(path: NSURL, transactions: [Transaction], vc: UIViewController) -> Bool {

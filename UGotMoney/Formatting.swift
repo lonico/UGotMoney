@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Support functions for format dates and currency.
 struct Formatting {
     
     static let dateFormat = NSDateFormatter.dateFormatFromTemplate("EEE, MMM d, yyyy", options: 0, locale: NSLocale.currentLocale())
