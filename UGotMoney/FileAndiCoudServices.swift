@@ -89,7 +89,7 @@ struct FileAndiCloudServices {
             var value: AnyObject?
             do {
                 try iCloudPath.getResourceValue(&value, forKey: NSURLIsUbiquitousItemKey)
-                print ("key: NSURLIsUbiquitousItemKey, value: \(value)")
+                //print(">>> key: NSURLIsUbiquitousItemKey, value: \(value)")
                 var success = false
                 if let value = value as? NSNumber {
                     if value == 1 {

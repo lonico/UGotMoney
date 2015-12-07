@@ -9,7 +9,7 @@
 import UIKit
 
 // The main view controller
-// A new transaction can quicly be entered using DataPickers
+// A new transaction can quickly be entered using DataPickers
 // and PickerViews
 
 // The UI is a table.  Each section contains 1 or 2 rows:

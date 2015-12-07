@@ -191,8 +191,8 @@ class AquaClient {
             self.access_token = access_token
             if let expires_in = result.valueForKey(JSONResponseKeys.expires_in) as? Double {
                 expiration_date = NSDate(timeIntervalSinceNow: expires_in - 300)
-                print(expires_in)
-                print(Formatting.formattedDate(expiration_date))
+                //print(expires_in)
+                //print(Formatting.formattedDate(expiration_date))
             }
             return true
         }

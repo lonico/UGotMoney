@@ -76,7 +76,7 @@ class AddNewClientViewController: UIViewController {
         }
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
         let person = Person(firstName: firstName, middleName: middleName, lastName: lastName, id: nil, context: context)
-        print(person)
+        //print(person)
         let nserror = CoreDataStackManager.sharedInstance().saveContext()
         if nserror != nil {
             AlertController.Alert(msg: nserror.localizedDescription, title: "Error!").showAlert(self)
