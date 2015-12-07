@@ -73,9 +73,9 @@ class TransactionTableViewController: UIViewController, UITableViewDataSource, U
         
         if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(filename)
-            print("writing to \(path)")
+            //print("writing to \(path)")
             if FileAndiCloudServices.writeToFile(path, transactions: transactions, vc: self) {
-                print("copying to iCLoud")
+                //print("copying to iCLoud")
                 FileAndiCloudServices.saveFileToiCloud(path, filename: filename, vc: self)
             }
         } else {

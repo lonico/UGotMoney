@@ -34,14 +34,14 @@ class InputTextFieldViewController: UIViewController, UITextFieldDelegate {
     @IBAction func addButtonTouchUp(sender: UIBarButtonItem) {
         
         value = textField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        print(">>> value: >>\(value)<<")
+        //print(">>> value: >>\(value)<<")
         delegate.didFinishEditingInputTextField(value)
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
         value = textField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        print(">>> done with editing: >>\(value)<<")
+        //print(">>> done with editing: >>\(value)<<")
         return true
     }
 }

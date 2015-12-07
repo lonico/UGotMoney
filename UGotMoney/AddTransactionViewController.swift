@@ -101,7 +101,7 @@ class AddTransactionViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        print(">>> \(__FUNCTION__)")
+        //print(">>> \(__FUNCTION__)")
         
         super.viewWillAppear(animated)
         choices = Choices(clients: Person.getClientNames(activeOnly: true),
@@ -125,7 +125,7 @@ class AddTransactionViewController: UIViewController {
     
     func dateValueChanged(sender: UIDatePicker) {
         
-        print(">>> dateValueChanged")
+        //print(">>> dateValueChanged")
         if selectedIndexPath == nil {
             print("Unexpected selectedIndexPath (nil)")
         }
@@ -269,7 +269,7 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print(">>> didSelect \(indexPath.section)")
+        //print(">>> didSelect \(indexPath.section)")
         if indexPath.row == 0 {
             if showSecondRow {
                 showSecondRow = false
@@ -305,11 +305,6 @@ extension AddTransactionViewController: UITableViewDataSource, UITableViewDelega
                 printInternalError("\(__FUNCTION__)")
             }
         }
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        print(">>> didDeselect \(indexPath.section)")
     }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
@@ -532,7 +527,7 @@ extension AddTransactionViewController: UIPickerViewDataSource,  UIPickerViewDel
     // MARK: UIPickerViewDelegate
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(">>> Selected: \(component) - \(row)")
+        // print(">>> Selected: \(component) - \(row)")
         if let text = self.pickerView(pickerView, titleForRow: row, forComponent: component) {
             showSecondRow = false
             switch pickerView {

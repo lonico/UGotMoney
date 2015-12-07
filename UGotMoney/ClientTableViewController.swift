@@ -18,7 +18,7 @@ class ClientTableViewController: UIViewController {
     var idIsEnabled = false
     
     override func viewWillAppear(animated: Bool) {
-        print(">>> \(__FUNCTION__)")
+        //print(">>> \(__FUNCTION__)")
         
         super.viewWillAppear(animated)
         clients = getPersons()

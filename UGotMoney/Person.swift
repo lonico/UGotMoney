@@ -72,7 +72,7 @@ class Person: NSManagedObject {
         if let fetchedObjects = fetchedAllResultsController.fetchedObjects {
             if fetchedObjects.count > 0 {
                 let max_id = fetchedObjects[0].valueForKey("id") as! Int
-                print(">>> \(max_id)")
+                //print(">>> \(max_id)")
                 return max_id + 1
             }
         }

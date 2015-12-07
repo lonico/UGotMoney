@@ -30,7 +30,7 @@ class EditPickerValuesViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         
-        print(">>> editPickerValues \(__FUNCTION__)")
+        //print(">>> editPickerValues \(__FUNCTION__)")
         clientsDict = Person.getClientNamesDict(true)
         clients = Person.getClientNames(activeOnly: true)
         paymentValues = PersistentData.getFees()
@@ -236,7 +236,7 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
         
         switch editingStyle {
         case .Delete:
-            print(">>> deleting")
+            //print(">>> deleting")
             deleteElement(indexPath.row, move: false)
             saveData()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -256,7 +256,7 @@ extension EditPickerValuesViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
-        print(">>> Moving")
+        //print(">>> Moving")
         if pickerLabel! == .clientName {
             print("Move not supported for Client name")
             return

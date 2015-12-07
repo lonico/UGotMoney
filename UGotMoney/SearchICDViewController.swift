@@ -47,7 +47,7 @@ class SearchICDViewController: UIViewController {
                         
                         alert.dispatchAlert(self)
                     } else {
-                        print("DONE with authentication")
+                        //print("DONE with authentication")
                         self.isAuthenticated = true
                         self.lookUpButton.enabled = true
                         self.searchButton.enabled = true
@@ -167,12 +167,12 @@ class SearchICDViewController: UIViewController {
         if newString.hasPrefix("%") {
             has_prefix = true
             newString = newString.substringFromIndex(newString.startIndex.advancedBy(1))
-            print(">>>\(newString)")
+            //print(">>>\(newString)")
         }
         if newString.hasSuffix("%") {
             has_suffix = true
             newString = newString.substringToIndex(newString.endIndex.advancedBy(-1))
-            print(">>>\(newString)")
+            //print(">>>\(newString)")
         }
         if has_prefix && has_suffix {
             query_suffix = "_cont"
