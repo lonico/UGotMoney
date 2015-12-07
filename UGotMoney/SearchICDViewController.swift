@@ -76,6 +76,9 @@ class SearchICDViewController: UIViewController {
                     } else if details == nil {
                         AlertController.Alert(msg: "no results", title: AlertController.AlertTitle.QueryError).showAlert(self)
                         self.readyForBusiness()
+                    } else if details["error"] != nil {
+                        AlertController.Alert(msg: details["error"] as? String, title: AlertController.AlertTitle.Error).showAlert(self)
+                        self.readyForBusiness()
                     } else {
                         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("icd10DetailsVC") as! ICD10DetailsTableViewController
                         vc.details = [details]
