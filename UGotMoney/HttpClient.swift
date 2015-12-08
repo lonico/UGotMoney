@@ -26,7 +26,13 @@ class HttpClient: NSObject {
         let urlWithParams = urlString + HttpClient.escapedParameters(parameters)
         
         // build request
-        let request = NSMutableURLRequest(URL: NSURL(string: urlWithParams)!)
+        let url = NSURL(string: urlWithParams)
+        if url == nil {
+            let errorMsg = "Invalid URL: \(urlWithParams)"
+            completion_handler(data: nil, error: errorMsg, statusCode: nil)
+            return
+        }
+        let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         

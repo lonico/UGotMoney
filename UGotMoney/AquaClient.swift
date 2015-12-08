@@ -135,6 +135,12 @@ class AquaClient {
     func lookUpICD10CodesWithName(name: String, completion_handler: ([String: AnyObject]!, String!) -> Void) {
         
         let urlString = CODE_URL + name + ".json"
+        if NSURL(string: urlString) == nil {
+            let errorMsg = "Invalid name: \(name)"
+            completion_handler(nil, errorMsg)
+            return
+        }
+
         lookUpICD10CodesWithURL(urlString, completion_handler: completion_handler)
     }
     

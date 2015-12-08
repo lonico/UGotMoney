@@ -37,7 +37,7 @@
 		C0A18A0B1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */; };
 		C0A18A0D1C056C5E00F48B39 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */; };
 		C0A18A111C08E92A00F48B39 /* TransactionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A101C08E92A00F48B39 /* TransactionDetailsViewController.swift */; };
-		C0B103971C155B39006C1638 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C0B103961C155B37006C1638 /* README.md */; };
+		C0B103971C155B39006C1638 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0B103961C155B37006C1638 /* README.txt */; };
 		C0B1039B1C155BF5006C1638 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1039A1C155BF5006C1638 /* InputTextFieldViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,7 +96,7 @@
 		C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICD10DetailsTableViewController.swift; sourceTree = "<group>"; };
 		C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
 		C0A18A101C08E92A00F48B39 /* TransactionDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewController.swift; sourceTree = "<group>"; };
-		C0B103961C155B37006C1638 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C0B103961C155B37006C1638 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		C0B1039A1C155BF5006C1638 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextFieldViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,7 +128,7 @@
 		C08068601BE6EA8D001C5B9A = {
 			isa = PBXGroup;
 			children = (
-				C0B103961C155B37006C1638 /* README.md */,
+				C0B103961C155B37006C1638 /* README.txt */,
 				C080686B1BE6EA8D001C5B9A /* UGotMoney */,
 				C08068831BE6EA8E001C5B9A /* UGotMoneyTests */,
 				C080688E1BE6EA8E001C5B9A /* UGotMoneyUITests */,
@@ -336,7 +336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0B103971C155B39006C1638 /* README.md in Resources */,
+				C0B103971C155B39006C1638 /* README.txt in Resources */,
 				C080687A1BE6EA8E001C5B9A /* LaunchScreen.storyboard in Resources */,
 				C08068771BE6EA8E001C5B9A /* Assets.xcassets in Resources */,
 				C08068721BE6EA8D001C5B9A /* Main.storyboard in Resources */,
