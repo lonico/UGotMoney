@@ -1,13 +1,13 @@
 My wife has a small private practice.  Though she keeps an excel spreadsheet for her accounting, she'd appreciate something more mobile and simpler for quick data entry.
 
 The main screen provides a quick way to record a transaction with a few selectable fields:
-  -) payment date (defaults to today's date)
-  -) client name (required)
-  -) amount paid (required)
-  -) payment type (required)
-  -) ICD-10 (optional)
-  -) service date (defaults to payment date)
-  -) Notes (optional)
+-) payment date (defaults to today's date)
+-) client name (required)
+-) amount paid (required)
+-) payment type (required)
+-) ICD-10 (optional)
+-) service date (defaults to payment date)
+-) Notes (optional)
 
 The field values are prepopulated and are selected using name pickers.  No typing is required, except for the notes field which is free format.
 Once the values are entered, the Save button will store the data using IOS CoreData.
@@ -16,7 +16,7 @@ In order to use the app, the user will first need to set up some clients, some f
 This is achieved using the "Edit" button.  An accessory button is shown for the editable values.  For fees (amout paid), a number is expected, for payment type a simple string is expected (eg cash, check, credit card, square, ...), for clients, firstname and lastname are required.  The client information is stored using IOS CoreData.  The fee and payment types are stored locally using NSUserDefaults.
 
 For ICD-10, a lookup is performed using an internet database (aqua.io).  If the code is known, it can be looked up directly,  The app stores locally the codes and descriptions using NSUserDefaults.  A search function is also available, it enables partial searches on the code and/or description.  The app can fetch and show most information about an ICD-10 code.  (The International Classification of Diseases (ICD) is the standard diagnostic tool for epidemiology, health management and clinical purposes: http://www.who.int/classifications/icd/en/ ).
-    (For instance, use F33.1 for look-up, or F33 for a search.)
+(For instance, use F33.1 for look-up, or F33 for a search.)
 
 Once data is entered, it can be visualized in two ways:
 1) a list of all transactions (organize icon) sorted by payment date.  A summary for each transaction is presented in a table.  If a transaction is selected, a detail view is presented.

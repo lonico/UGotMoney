@@ -21,14 +21,12 @@
 		C08068EC1BEE8925001C5B9A /* NamePickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */; };
 		C08068EE1BEEB153001C5B9A /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08068ED1BEEB153001C5B9A /* TextViewCell.swift */; };
 		C096EF311C0BFACD002624D2 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C096EF301C0BFACD002624D2 /* RoundedButton.swift */; };
-		C096EF331C0FF743002624D2 /* README in Resources */ = {isa = PBXBuildFile; fileRef = C096EF321C0FF743002624D2 /* README */; };
 		C096EF361C127CE6002624D2 /* FileAndiCoudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C096EF351C127CE6002624D2 /* FileAndiCoudServices.swift */; };
 		C0A189E91BF805FD00F48B39 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189E81BF805FD00F48B39 /* Person.swift */; };
 		C0A189EB1BF80BCB00F48B39 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EA1BF80BCB00F48B39 /* Transaction.swift */; };
 		C0A189ED1BF8182C00F48B39 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EC1BF8182C00F48B39 /* PersistentData.swift */; };
 		C0A189EF1BF81D8800F48B39 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189EE1BF81D8800F48B39 /* AlertController.swift */; };
 		C0A189F11BF83FCC00F48B39 /* EditPickerValuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */; };
-		C0A189F51BF85D1200F48B39 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */; };
 		C0A189F71BF9333700F48B39 /* AddNewClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */; };
 		C0A189FF1BFED3CB00F48B39 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A189FE1BFED3CA00F48B39 /* CoreDataStackManager.swift */; };
 		C0A18A011BFEDC2300F48B39 /* TransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A001BFEDC2300F48B39 /* TransactionTableViewController.swift */; };
@@ -39,6 +37,8 @@
 		C0A18A0B1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */; };
 		C0A18A0D1C056C5E00F48B39 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */; };
 		C0A18A111C08E92A00F48B39 /* TransactionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A18A101C08E92A00F48B39 /* TransactionDetailsViewController.swift */; };
+		C0B103971C155B39006C1638 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C0B103961C155B37006C1638 /* README.md */; };
+		C0B1039B1C155BF5006C1638 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1039A1C155BF5006C1638 /* InputTextFieldViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +79,6 @@
 		C08068E81BEE8925001C5B9A /* NamePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePickerViewCell.swift; sourceTree = "<group>"; };
 		C08068ED1BEEB153001C5B9A /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		C096EF301C0BFACD002624D2 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		C096EF321C0FF743002624D2 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		C096EF341C10A481002624D2 /* UGotMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UGotMoney.entitlements; sourceTree = "<group>"; };
 		C096EF351C127CE6002624D2 /* FileAndiCoudServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAndiCoudServices.swift; sourceTree = "<group>"; };
 		C0A189E81BF805FD00F48B39 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
@@ -87,7 +86,6 @@
 		C0A189EC1BF8182C00F48B39 /* PersistentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		C0A189EE1BF81D8800F48B39 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditPickerValuesViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTextFieldViewController.swift; path = ../InputTextFieldViewController.swift; sourceTree = "<group>"; };
 		C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewClientViewController.swift; sourceTree = "<group>"; };
 		C0A189FE1BFED3CA00F48B39 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 		C0A18A001BFEDC2300F48B39 /* TransactionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +96,8 @@
 		C0A18A0A1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICD10DetailsTableViewController.swift; sourceTree = "<group>"; };
 		C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
 		C0A18A101C08E92A00F48B39 /* TransactionDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewController.swift; sourceTree = "<group>"; };
+		C0B103961C155B37006C1638 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C0B1039A1C155BF5006C1638 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextFieldViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +128,7 @@
 		C08068601BE6EA8D001C5B9A = {
 			isa = PBXGroup;
 			children = (
+				C0B103961C155B37006C1638 /* README.md */,
 				C080686B1BE6EA8D001C5B9A /* UGotMoney */,
 				C08068831BE6EA8E001C5B9A /* UGotMoneyTests */,
 				C080688E1BE6EA8E001C5B9A /* UGotMoneyUITests */,
@@ -149,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				C096EF341C10A481002624D2 /* UGotMoney.entitlements */,
-				C096EF321C0FF743002624D2 /* README */,
 				C080687B1BE6EA8E001C5B9A /* Info.plist */,
 				C0A189F81BF9386100F48B39 /* Model */,
 				C0A189FA1BF9388E00F48B39 /* View */,
@@ -214,8 +214,8 @@
 				C096EF301C0BFACD002624D2 /* RoundedButton.swift */,
 				C080689D1BE6F5D2001C5B9A /* AddTransactionViewController.swift */,
 				C0A189F01BF83FCC00F48B39 /* EditPickerValuesViewController.swift */,
+				C0B1039A1C155BF5006C1638 /* InputTextFieldViewController.swift */,
 				C0A189F61BF9333700F48B39 /* AddNewClientViewController.swift */,
-				C0A189F41BF85D1200F48B39 /* InputTextFieldViewController.swift */,
 				C0A18A0C1C056C5E00F48B39 /* ClientTableViewController.swift */,
 				C0A18A001BFEDC2300F48B39 /* TransactionTableViewController.swift */,
 				C0A18A101C08E92A00F48B39 /* TransactionDetailsViewController.swift */,
@@ -336,7 +336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C096EF331C0FF743002624D2 /* README in Resources */,
+				C0B103971C155B39006C1638 /* README.md in Resources */,
 				C080687A1BE6EA8E001C5B9A /* LaunchScreen.storyboard in Resources */,
 				C08068771BE6EA8E001C5B9A /* Assets.xcassets in Resources */,
 				C08068721BE6EA8D001C5B9A /* Main.storyboard in Resources */,
@@ -377,6 +377,7 @@
 				C096EF361C127CE6002624D2 /* FileAndiCoudServices.swift in Sources */,
 				C08068EB1BEE8925001C5B9A /* LabelAndTextFieldCell.swift in Sources */,
 				C0A189EF1BF81D8800F48B39 /* AlertController.swift in Sources */,
+				C0B1039B1C155BF5006C1638 /* InputTextFieldViewController.swift in Sources */,
 				C0A18A051C010B8500F48B39 /* AquaClient.swift in Sources */,
 				C08068751BE6EA8D001C5B9A /* UGotMoney.xcdatamodeld in Sources */,
 				C0A189EB1BF80BCB00F48B39 /* Transaction.swift in Sources */,
@@ -389,7 +390,6 @@
 				C096EF311C0BFACD002624D2 /* RoundedButton.swift in Sources */,
 				C080689E1BE6F5D2001C5B9A /* AddTransactionViewController.swift in Sources */,
 				C0A18A0B1C02C61D00F48B39 /* ICD10DetailsTableViewController.swift in Sources */,
-				C0A189F51BF85D1200F48B39 /* InputTextFieldViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
