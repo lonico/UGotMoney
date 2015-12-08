@@ -43,7 +43,7 @@ You need the correct entitlements for iCloud Drive, but they should be part of t
 
 Running the app:
 Upon starting the app, you need to create a few values for clients, payment types and fees.  That's enough to create a few transactions.  Use the "edit" button, and the accessory buttons.
-To create ICDs, use the + button from the ICD-10 table.  A default empty value is provided.  There is a limit of 100 free queries per day.  Some valid value are f33, f33.4, f33.42, F43.21.
+To create ICDs, use the + button from the ICD-10 table.  A default empty value is provided.  There is a limit of 100 free queries per day.  Some valid values are f33, f33.4, f33.42, F43.21.
 In order to use iCloud Drive, it needs to be enabled on the iPhone or simulator.  Files can be exported through the action button in the transaction lists.
 
 
